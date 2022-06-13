@@ -1,0 +1,1133 @@
+{
+  "$id": "stand-alone-pn.json",
+  "type": "object",
+  "properties": {
+    "entryType": {
+      "type": "string",
+      "title": "Entry Type",
+      "description": "A code representing the entry type: 01 = Consumption – Free and Dutiable, 02 = Consumption - Quota/Visa, 03 = Consumption - Antidumping/ Countervailing Duty, 07 = Consumption - Antidumping/ Countervailing Duty & Quota/Visa Combination, 11 = Informal – Free and Dutiable, 12 = Informal - Quota/Visa (other than textiles), 21 = Warehouse, 23 = Temporary Importation Bond (TIB), 52 = Government Dutiable, 61 = Immediate Transportation, 62 = Transportation and Exportation, 81 = FTZ Admission",
+      "minLength": 2,
+      "maxLength": 2,
+      "enum": [
+        null,
+        "01",
+        "02",
+        "03",
+        "07",
+        "11",
+        "12",
+        "21",
+        "23",
+        "52",
+        "61",
+        "62",
+        "81"
+      ]
+    },
+    "referenceQualifier": {
+      "type": "string",
+      "title": "Reference Qualifier",
+      "description": "Code that defines the Reference Identifier Number being provided: ENT = Entry number, BOL = Bill of Lading Number (Ocean, Rail or Truck), AWB = Air waybill, FTZ = FTZ admission number, INB = In-bond number",
+      "minLength": 3,
+      "maxLength": 3,
+      "enum": ["ENT", "BOL", "AWB", "FTZ", "INB"]
+    },
+    "referenceNumber": {
+      "type": "string",
+      "title": "Reference Number",
+      "description": "The unique identifying number associated to the Reference Qualifier Code. For a bill of lading number it is the number as listed on the manifest or the In-Bond number.",
+      "minLength": 1,
+      "maxLength": 36
+    },
+    "dateOfArrival": {
+      "type": "number",
+      "minLength": 8,
+      "maxLength": 8,
+      "description": "Date expressed as CCYYMMDD where CC represents the first two digits of the calendar year.",
+      "title": "Estimate Date of Arrival",
+      "regex": "^((((19|[2-9]\\d)\\d{2})(0[13578]|1[02])(0[1-9]|[12]\\d|3[01]))|(((19|[2-9]\\d)\\d{2})(0[13456789]|1[012])(0[1-9]|[12]\\d|30))|(((19|[2-9]\\d)\\d{2})02(0[1-9]|1\\d|2[0-8]))|(((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|(([1][26]|[2468][048]|[3579][26])00))0229))$",
+      "regexFrontend": "^(((0[13578]|1[02])/(0[1-9]|[12]\\d|3[01])/((19|[2-9]\\d)\\d{2}))|((0[13456789]|1[012])/(0[1-9]|[12]\\d|30)/((19|[2-9]\\d)\\d{2}))|(02/(0[1-9]|1\\d|2[0-8])/((19|[2-9]\\d)\\d{2}))|(02/29/((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|(([1][26]|[2468][048]|[3579][26])00))))$",
+      "descriptionFrontend": "Date expressed as MM/DD/YYYY."
+    },
+    "billType": {
+      "type": "string",
+      "title": "Bill Type",
+      "description": "R = Regular / Simple Bill of Lading; Shipment Control Number (Mode Truck), M = Master Bill of Lading; Shipment Control Number (Mode Truck), T = Express Carrier Tracking Number (air only)",
+      "minLength": 1,
+      "maxLength": 1,
+      "enum": ["R", "M", "T"]
+    },
+    "timeOfArrival": {
+      "type": ["number", "null"],
+      "minLength": 4,
+      "maxLength": 4,
+      "description": "Time of Arrival",
+      "title": "Time of Arrival",
+      "regex": "^([01][0-9]|2[0-3])([0-5][0-9])$",
+      "regexFrontend": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
+      "descriptionFrontend": "Time expressed as HH:MM"
+    },
+    "modeOfTransport": {
+      "type": "string",
+      "title": "Mode of Transportation (MOT) Code",
+      "description": "A code representing the mode of transportation: 10 = Vessel, Non-container, 11 = Vessel, Container, 12 = Border Water-borne (only Mexico and Canada), 20 = Rail, Non-container, 21 = Rail, Container, 30 = Truck, Non-container, 31 = Truck, Container, 32 = Auto, 33 = Pedestrian, 34 = Road, other. Includes foot and animal-borne., 40 = Air, Non-container, 41 = Air, Container, 50 = Mail, 60 = Passenger, Hand Carried, 70 = Fixed Transport Installations. Includes pipeline and powerhouse.",
+      "minLength": 2,
+      "maxLength": 2,
+      "enum": [
+        "10",
+        "11",
+        "12",
+        "20",
+        "21",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "40",
+        "41",
+        "50",
+        "60",
+        "70"
+      ]
+    },
+    "pncNumber": {
+      "type": ["string", "null"],
+      "title": "PNC Number",
+      "description": "No IDEA!",
+      "minLength": 1,
+      "maxLength": 10
+    },
+    "USPortOfArrival": {
+      "type": ["string", "null"],
+      "minLength": 4,
+      "maxLength": 4,
+      "description": "Port of Arrival of the vessel in the U.S. ",
+      "title": "US Port of Arrival"
+    },
+    "htsCode": {
+      "type": ["string", "null"],
+      "title": "HTS Code",
+      "description": "HTS Code",
+      "minLength": 10,
+      "maxLength": 10
+    },
+    "governmentAgencyProgramCode": {
+      "type": ["string", "null"],
+      "title": "FDA Program Code",
+      "description": "FDA Program Code",
+      "minLength": 3,
+      "maxLength": 3
+    },
+    "governmentAgencyProcessingCode": {
+      "type": ["string", "null"],
+      "title": "FDA Agency Processing Code",
+      "description": "FDA Agency Processing Code",
+      "minLength": 1,
+      "maxLength": 3,
+      "enum": [null, "NED", "RED"]
+    },
+    "intendedUseCode": {
+      "type": ["string", "null"],
+      "title": "EPA Intended Use Code",
+      "description": "EPA Intended Use Code",
+      "minLength": 1,
+      "maxLength": 7,
+      "regexFrontend": "\\d\\d\\d.\\d\\d\\d"
+    },
+    "productCodeNumber": {
+      "type": ["string", "null"],
+      "title": "FDA Product Code Number",
+      "description": "FDA Product Code Number",
+      "minLength": 7,
+      "maxLength": 7
+    },
+    "sourceTypeCode": {
+      "type": ["string", "null"],
+      "title": "FDA Source Type Code",
+      "description": "FDA Source Type Code",
+      "minLength": 2,
+      "maxLength": 2,
+      "enum": [null, "30", "39"]
+    },
+    "countryOfOrigin": {
+      "type": ["string", "null"],
+      "title": "FDA Country Of Origin",
+      "description": "FDA Country Of Origin",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "productDescription": {
+      "type": ["string", "null"],
+      "title": "FDA Product Description",
+      "description": "FDA Product Description",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "remarks": {
+      "type": ["string", "null"],
+      "title": "FDA Remarks",
+      "description": "FDA Remarks",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "affirmationCode1": {
+      "type": ["string", "null"],
+      "title": "Affirmation Code 1",
+      "description": "Affirmation Code 1",
+      "minLength": 1,
+      "maxLength": 15,
+      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
+    },
+    "affirmationQualifier1": {
+      "type": ["string", "null"],
+      "title": "Affirmation Value 1",
+      "description": "Affirmation Value 1",
+      "minLength": 1,
+      "maxLength": 15
+    },
+    "affirmationCode2": {
+      "type": ["string", "null"],
+      "title": "Affirmation Code 1",
+      "description": "Affirmation Code 1",
+      "minLength": 1,
+      "maxLength": 15,
+      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
+    },
+    "affirmationQualifier2": {
+      "type": ["string", "null"],
+      "title": "Affirmation Value 1",
+      "description": "Affirmation Value 1",
+      "minLength": 1,
+      "maxLength": 15
+    },
+    "affirmationCode3": {
+      "type": ["string", "null"],
+      "title": "Affirmation Code 1",
+      "description": "Affirmation Code 1",
+      "minLength": 1,
+      "maxLength": 15,
+      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
+    },
+    "affirmationQualifier3": {
+      "type": ["string", "null"],
+      "title": "Affirmation Value 1",
+      "description": "Affirmation Value 1",
+      "minLength": 1,
+      "maxLength": 15
+    },
+    "affirmationCode4": {
+      "type": ["string", "null"],
+      "title": "Affirmation Code 1",
+      "description": "Affirmation Code 1",
+      "minLength": 1,
+      "maxLength": 15,
+      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
+    },
+    "affirmationQualifier4": {
+      "type": ["string", "null"],
+      "title": "Affirmation Value 1",
+      "description": "Affirmation Value 1",
+      "minLength": 1,
+      "maxLength": 15
+    },
+    "affirmationCode5": {
+      "type": ["string", "null"],
+      "title": "Affirmation Code 1",
+      "description": "Affirmation Code 1",
+      "minLength": 1,
+      "maxLength": 15,
+      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
+    },
+    "affirmationQualifier5": {
+      "type": ["string", "null"],
+      "title": "Affirmation Value 1",
+      "description": "Affirmation Value 1",
+      "minLength": 1,
+      "maxLength": 15
+    },
+    "pnSubmitterFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterFeiOrDunsCode",
+      "description": "pnSubmitterFeiOrDunsCode",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnSubmitterFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterFeiOrDuns",
+      "description": "pnSubmitterFeiOrDuns",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnSubmitterName": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterName",
+      "description": "pnSubmitterName",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnSubmitterAddress": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterAddress",
+      "description": "pnSubmitterAddress",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnSubmitterAddress2": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterAddress2",
+      "description": "pnSubmitterAddress2",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnSubmitterUnitNumber": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterUnitNumber",
+      "description": "pnSubmitterUnitNumber",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnSubmitterCity": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterCity",
+      "description": "pnSubmitterCity",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnSubmitterStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterStateOrProvince",
+      "description": "pnSubmitterStateOrProvince",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnSubmitterCountry": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterCountry",
+      "description": "pnSubmitterCountry",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnSubmitterZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterZipPostalCode",
+      "description": "pnSubmitterZipPostalCode",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnSubmitterPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterPointOfContactName",
+      "description": "pnSubmitterPointOfContactName",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnSubmitterPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterPointOfContactPhone",
+      "description": "pnSubmitterPointOfContactPhone",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnSubmitterPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "pnSubmitterPointOfContactEmail",
+      "description": "pnSubmitterPointOfContactEmail",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnTransmitterFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterFeiOrDunsCode",
+      "description": "pnTransmitterFeiOrDunsCode",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnTransmitterFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterFeiOrDuns",
+      "description": "pnTransmitterFeiOrDuns",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnTransmitterName": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterName",
+      "description": "pnTransmitterName",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnTransmitterAddress": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterAddress",
+      "description": "pnTransmitterAddress",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnTransmitterAddress2": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterAddress2",
+      "description": "pnTransmitterAddress2",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnTransmitterUnitNumber": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterUnitNumber",
+      "description": "pnTransmitterUnitNumber",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnTransmitterCity": {
+      "type": ["string", "null"],
+      "title": "pn Transmitter City",
+      "description": "pn Transmitter City",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnTransmitterStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "pn Transmitter State Or Province",
+      "description": "pn Transmitter State Or Province",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnTransmitterCountry": {
+      "type": ["string", "null"],
+      "title": "pn Transmitter Country",
+      "description": "pn Submitter Country",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnTransmitterZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "pn Transmitter Zip Postal Code",
+      "description": "pn Transmitter Zip Postal Code",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "pnTransmitterPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "pn Transmitter Point Of Contact Name",
+      "description": "pn Transmitter Point Of Contact Name",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnTransmitterPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterPointOfContactPhone",
+      "description": "pnTransmitterPointOfContactPhone",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "pnTransmitterPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "pnTransmitterPointOfContactEmail",
+      "description": "pnTransmitterPointOfContactEmail",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "manufacturerFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "Manufacturer FEI or DUNS Code",
+      "description": "Manufacturer FEI or DUNS Code",
+      "minLength": 1,
+      "maxLength": 45,
+      "enum": [null, "16", "47"]
+    },
+    "manufacturerFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "Manufacturer FEI or DUNS",
+      "description": "Manufacturer FEI or DUNS",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
+    },
+    "manufacturerName": {
+      "type": ["string", "null"],
+      "description": "Manufacturer Name",
+      "minLength": 1,
+      "maxLength": 45,
+      "title": "Manufacturer Name",
+      "fieldNoDashesAndDots": true
+    },
+    "manufacturerAddress": {
+      "type": ["string", "null"],
+      "description": "Manufacturer Address",
+      "minLength": 1,
+      "maxLength": 45,
+      "title": "Manufacturer Address",
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "manufacturerAddress2": {
+      "type": ["string", "null"],
+      "title": "Manufacturer Address 2",
+      "minLength": 1,
+      "maxLength": 45,
+      "description": "Manufacturer Address 2",
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "manufacturerUnitNumber": {
+      "type": ["string", "null"],
+      "title": "Manufacturer Unit Number",
+      "description": "Manufacturer Unit Number",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "manufacturerCity": {
+      "type": ["string", "null"],
+      "title": "Manufacturer City",
+      "description": "Manufacturer City",
+      "minLength": 1,
+      "maxLength": 21
+    },
+    "manufacturerStateOrProvince": {
+      "type": ["string", "null"],
+      "description": "Manufacturer State Or Province",
+      "title": "Manufacturer State Or Province",
+      "minLength": 2,
+      "maxLength": 3
+    },
+    "manufacturerCountry": {
+      "type": ["string", "null"],
+      "title": "Manufacturer Country",
+      "description": "Manufacturer Country",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "manufacturerZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "Manufacturer Postal Code",
+      "description": "Manufacturer Postal Code",
+      "minLength": 3,
+      "maxLength": 9
+    },
+    "manufacturerPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "Manufacturer Contact Name",
+      "description": "Manufacturer Contact Name",
+      "minLength": 2,
+      "maxLength": 23
+    },
+    "manufacturerPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "Manufacturer Contact Phone",
+      "description": "Manufacturer Contact Phone",
+      "minLength": 5,
+      "maxLength": 15
+    },
+    "manufacturerPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "Manufacturer Contact Email",
+      "description": "Manufacturer Contact Email",
+      "minLength": 7,
+      "maxLength": 35
+    },
+    "ultimateConsigneeFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeFeiOrDunsCode",
+      "description": "ultimateConsigneeFeiOrDunsCode",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeFeiOrDuns",
+      "description": "ultimateConsigneeFeiOrDuns",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeName": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeName",
+      "description": "ultimateConsigneeName",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeAddress": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeAddress",
+      "description": "ultimateConsigneeAddress",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeAddress2": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeAddress2",
+      "description": "ultimateConsigneeAddress2",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeUnitNumber": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeUnitNumber",
+      "description": "ultimateConsigneeUnitNumber",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeCity": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeCity",
+      "description": "ultimateConsigneeCity",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeStateOrProvince",
+      "description": "ultimateConsigneeStateOrProvince",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeCountry": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeCountry",
+      "description": "ultimateConsigneeCountry",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeZipPostalCode",
+      "description": "ultimateConsigneeZipPostalCode",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneePointOfContactName": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneePointOfContactName",
+      "description": "ultimateConsigneePointOfContactName",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneePointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneePointOfContactPhone",
+      "description": "ultimateConsigneePointOfContactPhone",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneePointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneePointOfContactEmail",
+      "description": "ultimateConsigneePointOfContactEmail",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "fdaImporterFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "FDA Importer FEI Or DUNS Code",
+      "description": "FDA Importer FEI Or DUNS Code",
+      "minLength": 1,
+      "maxLength": 45,
+      "enum": [null, "16", "47"]
+    },
+    "fdaImporterFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "FDA Importer FEI Or DUNS",
+      "description": "FDA Importer FEI Or DUNS",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
+    },
+    "fdaImporterName": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Name",
+      "description": "FDA Importer Name",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "fdaImporterAddress": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Address",
+      "description": "FDA Importer Address",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "fdaImporterAddress2": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Address 2",
+      "description": "FDA Importer Address 2",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
+    },
+    "fdaImporterUnitNumber": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Unit Number",
+      "description": "FDA Importer Unit Number",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "fdaImporterCity": {
+      "type": ["string", "null"],
+      "title": "FDA Importer City",
+      "description": "FDA Importer City",
+      "minLength": 1,
+      "maxLength": 21
+    },
+    "fdaImporterStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "FDA Importer State Or Province",
+      "description": "FDA Importer State Or Province",
+      "minLength": 2,
+      "maxLength": 3
+    },
+    "fdaImporterCountry": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Country",
+      "description": "FDA Importer Country",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "fdaImporterZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Postal Code",
+      "description": "FDA Importer Postal Code",
+      "minLength": 3,
+      "maxLength": 9
+    },
+    "fdaImporterPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Contact Name",
+      "description": "FDA Importer Contact Name",
+      "minLength": 2,
+      "maxLength": 23
+    },
+    "fdaImporterPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Contact Phone",
+      "description": "FDA Importer Contact Phone",
+      "minLength": 5,
+      "maxLength": 15
+    },
+    "fdaImporterPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "FDA Importer Contact Email",
+      "description": "FDA Importer Contact Email",
+      "minLength": 7,
+      "maxLength": 35
+    },
+    "shipperFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "Shipper FEI Or DUNS Code",
+      "description": "Shipper FEI Or DUNS Code",
+      "minLength": 1,
+      "maxLength": 45,
+      "enum": [null, "16", "47"]
+    },
+    "shipperFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "Shipper FEI Or DUNS",
+      "description": "Shipper FEI Or DUNS",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
+    },
+    "shipperName": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 45,
+      "description": "Shipper Name",
+      "title": "Shipper Name",
+      "regex": "^[a-zA-Z0-9 .]{1,60}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "shipperAddress": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 45,
+      "description": "Shipper Address",
+      "title": "Shipper Address",
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "shipperAddress2": {
+      "type": ["string", "null"],
+      "title": "Shipper Address 2",
+      "description": "Shipper Address 2",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "shipperUnitNumber": {
+      "type": ["string", "null"],
+      "title": "Shipper Unit Number",
+      "description": "Shipper Unit Number",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "shipperCity": {
+      "type": ["string", "null"],
+      "title": "Shipper City",
+      "minLength": 1,
+      "maxLength": 21,
+      "fieldNoDashesAndDots": true,
+      "description": "Shipper City"
+    },
+    "shipperStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "Shipper State Or Province",
+      "minLength": 2,
+      "maxLength": 3,
+      "description": "Shipper State Or Province"
+    },
+    "shipperCountry": {
+      "type": ["string", "null"],
+      "minLength": 2,
+      "maxLength": 2,
+      "title": "Shipper Country",
+      "description": "Shipper Country"
+    },
+    "shipperZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "Shipper Postal Code",
+      "description": "Shipper Postal Code",
+      "minLength": 3,
+      "maxLength": 9
+    },
+    "shipperPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "Shipper Contact Name",
+      "description": "Shipper Contact Name",
+      "minLength": 2,
+      "maxLength": 23
+    },
+    "shipperPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "Shipper Contact Phone",
+      "description": "Shipper Contact Phone",
+      "minLength": 5,
+      "maxLength": 15
+    },
+    "shipperPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "Shipper Contact Email",
+      "description": "Shipper Contact Email",
+      "minLength": 7,
+      "maxLength": 35
+    },
+    "ownerFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "Owner Fei Or Duns Code",
+      "description": "Owner Fei Or Duns Code",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "Owner Fei Or Duns",
+      "description": "OwnerFei Or Duns",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerName": {
+      "type": ["string", "null"],
+      "title": "Owner Name",
+      "description": "Owner Name",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerAddress": {
+      "type": ["string", "null"],
+      "title": "Owner Address",
+      "description": "Owner Address",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerAddress2": {
+      "type": ["string", "null"],
+      "title": "Owner Address 2",
+      "description": "Owner Address 2",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerUnitNumber": {
+      "type": ["string", "null"],
+      "title": "Owner Unit Number",
+      "description": "Owner Unit Number",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerCity": {
+      "type": ["string", "null"],
+      "title": "Owner City",
+      "description": "Owner City",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "Owner State Or Province",
+      "description": "Owner State Or Province",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerCountry": {
+      "type": ["string", "null"],
+      "title": "Owner Country",
+      "description": "Owner Country",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "Owner Postal Code",
+      "description": "Owner Postal Code",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "Owner Point Of Contact Name",
+      "description": "Owner Point Of Contact Name",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "Owner Point Of Contact Phone",
+      "description": "Owner Point Of Contact Phone",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ownerPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "Owner Point Of Contact Email",
+      "description": "Owner Point Of Contact Email",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "location Of Goods Fei Or Duns Code",
+      "description": "location Of Goods Fei Or Duns Code",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "location Of Goods Fei Or Duns",
+      "description": "location Of Goods Fei Or Duns",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsName": {
+      "type": ["string", "null"],
+      "title": "location Of Goods Name",
+      "description": "location Of Goods Name",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsAddress": {
+      "type": ["string", "null"],
+      "title": "location Of Goods Address",
+      "description": "location Of Goods Address",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsAddress2": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsAddress2",
+      "description": "locationOfGoodsAddress2",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsUnitNumber": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsUnitNumber",
+      "description": "locationOfGoodsUnitNumber",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsCity": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsCity",
+      "description": "locationOfGoodsCity",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsStateOrProvince",
+      "description": "locationOfGoodsStateOrProvince",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsCountry": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsCountry",
+      "description": "locationOfGoodsCountry",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsZipPostalCode",
+      "description": "locationOfGoodsZipPostalCode",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsPointOfContactName",
+      "description": "locationOfGoodsPointOfContactName",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsPointOfContactPhone",
+      "description": "locationOfGoodsPointOfContactPhone",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsPointOfContactEmail",
+      "description": "locationOfGoodsPointOfContactEmail",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "foreignSupplierVerificationProgramImporterFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Fei Or Duns Code",
+      "description": "Foreign Supplier Verification Program Importer Fei Or Duns Code",
+      "minLength": 2,
+      "maxLength": 2,
+      "enum": [null, "16", "47"]
+    },
+    "foreignSupplierVerificationProgramImporterFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Fei Or Duns",
+      "description": "Foreign Supplier Verification Program Importer Fei Or Duns",
+      "minLength": 1,
+      "maxLength": 10,
+      "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
+    },
+    "foreignSupplierVerificationProgramImporterName": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Name",
+      "description": "Foreign Supplier Verification Program Importer Name",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "foreignSupplierVerificationProgramImporterAddress": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Address",
+      "description": "Foreign Supplier Verification Program Importer Address",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "foreignSupplierVerificationProgramImporterAddress2": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Address 2",
+      "description": "Foreign Supplier Verification Program Importer Address 2",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "foreignSupplierVerificationProgramImporterUnitNumber": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Unit Number",
+      "description": "Foreign Supplier Verification Program Importer Unit Number",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "foreignSupplierVerificationProgramImporterCity": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer City",
+      "description": "Foreign Supplier Verification Program Importer City",
+      "minLength": 1,
+      "maxLength": 21
+    },
+    "foreignSupplierVerificationProgramImporterStateOrProvince": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer State Or Province",
+      "description": "Foreign Supplier Verification Program Importer State Or Province",
+      "minLength": 2,
+      "maxLength": 3
+    },
+    "foreignSupplierVerificationProgramImporterCountry": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Country",
+      "description": "Foreign Supplier Verification Program Importer Country",
+      "minLength": 2,
+      "maxLength": 2
+    },
+    "foreignSupplierVerificationProgramImporterZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Postal Code",
+      "description": "Foreign Supplier Verification Program Importer Postal Code",
+      "minLength": 3,
+      "maxLength": 9
+    },
+    "foreignSupplierVerificationProgramImporterPointOfContactName": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Point Of Contact Name",
+      "description": "Foreign Supplier Verification Program Importer Point Of Contact Name",
+      "minLength": 2,
+      "maxLength": 23,
+      "regex": "^[^<>%$:ñÑà-ü]{2,23}$"
+    },
+    "foreignSupplierVerificationProgramImporterPointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Point Of Contact Phone",
+      "description": "Foreign Supplier Verification Program Importer Point Of Contact Phone",
+      "minLength": 5,
+      "maxLength": 15,
+      "regex": "^[^<>%$:ñÑà-ü]{5,15}$"
+    },
+    "foreignSupplierVerificationProgramImporterPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "Foreign Supplier Verification Program Importer Point Of Contact Email",
+      "description": "Foreign Supplier Verification Program Importer Point Of Contact Email",
+      "minLength": 7,
+      "maxLength": 35,
+      "regex": "^[^<>%$:ñÑà-ü]{7,35}$"
+    },
+    "packaging": {
+      "type": "array",
+      "minItems": 3,
+      "additionalItems": false,
+      "items": [
+        { "type": "number" },
+        { "enum": ["Street", "Avenue", "Boulevard"] },
+        { "enum": ["NW", "NE", "SW", "SE"] }
+      ]
+    }
+  },
+  "required": [
+    "entryType",
+    "referenceQualifier",
+    "referenceNumber",
+    "dateOfArrival",
+    "billType",
+    "modeOfTransport",
+    "governmentAgencyProgramCode",
+    "sourceTypeCode",
+    "packaging"
+  ]
+}
