@@ -9,7 +9,6 @@
       "minLength": 2,
       "maxLength": 2,
       "enum": [
-        null,
         "01",
         "02",
         "03",
@@ -58,7 +57,7 @@
       "enum": ["R", "M", "T"]
     },
     "timeOfArrival": {
-      "type": ["number", "null"],
+      "type": "number",
       "minLength": 4,
       "maxLength": 4,
       "description": "Time of Arrival",
@@ -93,72 +92,74 @@
     },
     "pncNumber": {
       "type": ["string", "null"],
-      "title": "PNC Number",
-      "description": "No IDEA!",
+      "title": "Prior Notice Confirmation Number",
+      "description": "The confirmation number received from FDA when prior notice is received.",
       "minLength": 1,
-      "maxLength": 10
+      "maxLength": 12
     },
-    "USPortOfArrival": {
-      "type": ["string", "null"],
+    "portOfArrival": {
+      "type": "string",
       "minLength": 4,
       "maxLength": 4,
       "description": "Port of Arrival of the vessel in the U.S. ",
       "title": "US Port of Arrival"
     },
     "htsCode": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "HTS Code",
       "description": "HTS Code",
       "minLength": 10,
       "maxLength": 10
     },
     "governmentAgencyProgramCode": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "FDA Program Code",
-      "description": "FDA Program Code",
+      "description": "FOO = Food*",
       "minLength": 3,
-      "maxLength": 3
+      "maxLength": 3,
+      "const": "FOO"
     },
     "governmentAgencyProcessingCode": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "FDA Agency Processing Code",
       "description": "FDA Agency Processing Code",
       "minLength": 1,
       "maxLength": 3,
-      "enum": [null, "NED", "RED"]
+      "enum": ["NSF", "PRO", "FEE", "ADD", "DSU"]
     },
     "intendedUseCode": {
       "type": ["string", "null"],
-      "title": "EPA Intended Use Code",
-      "description": "EPA Intended Use Code",
+      "title": "Intended Use Code",
+      "description": "Intended Use Code",
       "minLength": 1,
       "maxLength": 7,
       "regexFrontend": "\\d\\d\\d.\\d\\d\\d"
     },
     "productCodeNumber": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "FDA Product Code Number",
       "description": "FDA Product Code Number",
       "minLength": 7,
-      "maxLength": 7
+      "maxLength": 7,
+      "regexFrontend": "^(((((0[2-579]|1[2-8]|2[0-9]|3[0-9]|4[0-25-6]|69|7[0-2])[A-Z])|(50[C-GL]|52D))[A-Z-])|(54[A-Z][A-CL-MY]))[A-Z-][A-Z0-9]{2}$"
     },
     "sourceTypeCode": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "FDA Source Type Code",
       "description": "FDA Source Type Code",
       "minLength": 2,
       "maxLength": 2,
-      "enum": [null, "30", "39"]
+      "enum": ["262", "39", "CSH", "294"]
     },
     "countryOfOrigin": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "FDA Country Of Origin",
       "description": "FDA Country Of Origin",
       "minLength": 2,
       "maxLength": 2
     },
     "productDescription": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "FDA Product Description",
       "description": "FDA Product Description",
       "minLength": 1,
@@ -166,86 +167,31 @@
       "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
     },
     "remarks": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "FDA Remarks",
       "description": "FDA Remarks",
       "minLength": 1,
       "maxLength": 45
     },
-    "affirmationCode1": {
-      "type": ["string", "null"],
-      "title": "Affirmation Code 1",
-      "description": "Affirmation Code 1",
-      "minLength": 1,
-      "maxLength": 15,
-      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
-    },
-    "affirmationQualifier1": {
-      "type": ["string", "null"],
-      "title": "Affirmation Value 1",
-      "description": "Affirmation Value 1",
-      "minLength": 1,
-      "maxLength": 15
-    },
-    "affirmationCode2": {
-      "type": ["string", "null"],
-      "title": "Affirmation Code 1",
-      "description": "Affirmation Code 1",
-      "minLength": 1,
-      "maxLength": 15,
-      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
-    },
-    "affirmationQualifier2": {
-      "type": ["string", "null"],
-      "title": "Affirmation Value 1",
-      "description": "Affirmation Value 1",
-      "minLength": 1,
-      "maxLength": 15
-    },
-    "affirmationCode3": {
-      "type": ["string", "null"],
-      "title": "Affirmation Code 1",
-      "description": "Affirmation Code 1",
-      "minLength": 1,
-      "maxLength": 15,
-      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
-    },
-    "affirmationQualifier3": {
-      "type": ["string", "null"],
-      "title": "Affirmation Value 1",
-      "description": "Affirmation Value 1",
-      "minLength": 1,
-      "maxLength": 15
-    },
-    "affirmationCode4": {
-      "type": ["string", "null"],
-      "title": "Affirmation Code 1",
-      "description": "Affirmation Code 1",
-      "minLength": 1,
-      "maxLength": 15,
-      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
-    },
-    "affirmationQualifier4": {
-      "type": ["string", "null"],
-      "title": "Affirmation Value 1",
-      "description": "Affirmation Value 1",
-      "minLength": 1,
-      "maxLength": 15
-    },
-    "affirmationCode5": {
-      "type": ["string", "null"],
-      "title": "Affirmation Code 1",
-      "description": "Affirmation Code 1",
-      "minLength": 1,
-      "maxLength": 15,
-      "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
-    },
-    "affirmationQualifier5": {
-      "type": ["string", "null"],
-      "title": "Affirmation Value 1",
-      "description": "Affirmation Value 1",
-      "minLength": 1,
-      "maxLength": 15
+    "affirmationOfCompliance": {
+      "type": "array",
+      "items": {
+        "code": {
+          "type": ["string", "null"],
+          "title": "Affirmation Code 1",
+          "description": "Affirmation Code 1",
+          "minLength": 1,
+          "maxLength": 15,
+          "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
+        },
+        "qualifier": {
+          "type": ["string", "null"],
+          "title": "Affirmation Value 1",
+          "description": "Affirmation Value 1",
+          "minLength": 1,
+          "maxLength": 15
+        }
+      }
     },
     "pnSubmitterFeiOrDunsCode": {
       "type": ["string", "null"],
@@ -262,7 +208,7 @@
       "maxLength": 45
     },
     "pnSubmitterName": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnSubmitterName",
       "description": "pnSubmitterName",
       "minLength": 1,
@@ -293,7 +239,7 @@
       "maxLength": 45
     },
     "pnSubmitterCity": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnSubmitterCity",
       "description": "pnSubmitterCity",
       "minLength": 1,
@@ -307,7 +253,7 @@
       "maxLength": 45
     },
     "pnSubmitterCountry": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnSubmitterCountry",
       "description": "pnSubmitterCountry",
       "minLength": 1,
@@ -321,7 +267,7 @@
       "maxLength": 45
     },
     "pnSubmitterPointOfContactName": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnSubmitterPointOfContactName",
       "description": "pnSubmitterPointOfContactName",
       "minLength": 1,
@@ -329,7 +275,7 @@
       "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
     },
     "pnSubmitterPointOfContactPhone": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnSubmitterPointOfContactPhone",
       "description": "pnSubmitterPointOfContactPhone",
       "minLength": 1,
@@ -337,7 +283,7 @@
       "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
     },
     "pnSubmitterPointOfContactEmail": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnSubmitterPointOfContactEmail",
       "description": "pnSubmitterPointOfContactEmail",
       "minLength": 1,
@@ -359,7 +305,7 @@
       "maxLength": 45
     },
     "pnTransmitterName": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnTransmitterName",
       "description": "pnTransmitterName",
       "minLength": 1,
@@ -390,7 +336,7 @@
       "maxLength": 45
     },
     "pnTransmitterCity": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pn Transmitter City",
       "description": "pn Transmitter City",
       "minLength": 1,
@@ -404,7 +350,7 @@
       "maxLength": 45
     },
     "pnTransmitterCountry": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pn Transmitter Country",
       "description": "pn Submitter Country",
       "minLength": 1,
@@ -418,7 +364,7 @@
       "maxLength": 45
     },
     "pnTransmitterPointOfContactName": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pn Transmitter Point Of Contact Name",
       "description": "pn Transmitter Point Of Contact Name",
       "minLength": 1,
@@ -426,7 +372,7 @@
       "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
     },
     "pnTransmitterPointOfContactPhone": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnTransmitterPointOfContactPhone",
       "description": "pnTransmitterPointOfContactPhone",
       "minLength": 1,
@@ -434,14 +380,14 @@
       "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
     },
     "pnTransmitterPointOfContactEmail": {
-      "type": ["string", "null"],
+      "type": "string",
       "title": "pnTransmitterPointOfContactEmail",
       "description": "pnTransmitterPointOfContactEmail",
       "minLength": 1,
       "maxLength": 45,
       "regex": "^[^<>%$:ñÑà-ü]{1,45}$"
     },
-    "manufacturerFeiOrDunsCode": {
+    "manufacturerOfGoodsFeiOrDunsCode": {
       "type": ["string", "null"],
       "title": "Manufacturer FEI or DUNS Code",
       "description": "Manufacturer FEI or DUNS Code",
@@ -449,7 +395,7 @@
       "maxLength": 45,
       "enum": [null, "16", "47"]
     },
-    "manufacturerFeiOrDuns": {
+    "manufacturerOfGoodsFeiOrDuns": {
       "type": ["string", "null"],
       "title": "Manufacturer FEI or DUNS",
       "description": "Manufacturer FEI or DUNS",
@@ -457,15 +403,15 @@
       "maxLength": 45,
       "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
     },
-    "manufacturerName": {
-      "type": ["string", "null"],
+    "manufacturerOfGoodsName": {
+      "type": "string",
       "description": "Manufacturer Name",
       "minLength": 1,
       "maxLength": 45,
       "title": "Manufacturer Name",
       "fieldNoDashesAndDots": true
     },
-    "manufacturerAddress": {
+    "manufacturerOfGoodsAddress": {
       "type": ["string", "null"],
       "description": "Manufacturer Address",
       "minLength": 1,
@@ -475,7 +421,7 @@
       "fieldNoDashesAndDots": true,
       "fieldTrim": true
     },
-    "manufacturerAddress2": {
+    "manufacturerOfGoodsAddress2": {
       "type": ["string", "null"],
       "title": "Manufacturer Address 2",
       "minLength": 1,
@@ -485,150 +431,253 @@
       "fieldNoDashesAndDots": true,
       "fieldTrim": true
     },
-    "manufacturerUnitNumber": {
+    "manufacturerOfGoodsUnitNumber": {
       "type": ["string", "null"],
       "title": "Manufacturer Unit Number",
       "description": "Manufacturer Unit Number",
       "minLength": 1,
       "maxLength": 45
     },
-    "manufacturerCity": {
-      "type": ["string", "null"],
+    "manufacturerOfGoodsCity": {
+      "type": "string",
       "title": "Manufacturer City",
       "description": "Manufacturer City",
       "minLength": 1,
       "maxLength": 21
     },
-    "manufacturerStateOrProvince": {
+    "manufacturerOfGoodsStateOrProvince": {
       "type": ["string", "null"],
       "description": "Manufacturer State Or Province",
       "title": "Manufacturer State Or Province",
       "minLength": 2,
       "maxLength": 3
     },
-    "manufacturerCountry": {
-      "type": ["string", "null"],
+    "manufacturerOfGoodsCountry": {
+      "type": "string",
       "title": "Manufacturer Country",
       "description": "Manufacturer Country",
       "minLength": 2,
       "maxLength": 2
     },
-    "manufacturerZipPostalCode": {
+    "manufacturerOfGoodsZipPostalCode": {
       "type": ["string", "null"],
       "title": "Manufacturer Postal Code",
       "description": "Manufacturer Postal Code",
       "minLength": 3,
       "maxLength": 9
     },
-    "manufacturerPointOfContactName": {
-      "type": ["string", "null"],
+    "manufacturerOfGoodsPointOfContactName": {
+      "type": "string",
       "title": "Manufacturer Contact Name",
       "description": "Manufacturer Contact Name",
       "minLength": 2,
       "maxLength": 23
     },
-    "manufacturerPointOfContactPhone": {
-      "type": ["string", "null"],
+    "manufacturerOfGoodsPointOfContactPhone": {
+      "type": "string",
       "title": "Manufacturer Contact Phone",
       "description": "Manufacturer Contact Phone",
       "minLength": 5,
       "maxLength": 15
     },
-    "manufacturerPointOfContactEmail": {
-      "type": ["string", "null"],
+    "manufacturerOfGoodsPointOfContactEmail": {
+      "type": "string",
       "title": "Manufacturer Contact Email",
       "description": "Manufacturer Contact Email",
       "minLength": 7,
       "maxLength": 35
     },
-    "ultimateConsigneeFeiOrDunsCode": {
+    "shipperFeiOrDunsCode": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeFeiOrDunsCode",
-      "description": "ultimateConsigneeFeiOrDunsCode",
+      "title": "Shipper FEI Or DUNS Code",
+      "description": "Shipper FEI Or DUNS Code",
+      "minLength": 1,
+      "maxLength": 45,
+      "enum": [null, "16", "47"]
+    },
+    "shipperFeiOrDuns": {
+      "type": ["string", "null"],
+      "title": "Shipper FEI Or DUNS",
+      "description": "Shipper FEI Or DUNS",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
+    },
+    "shipperName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 45,
+      "description": "Shipper Name",
+      "title": "Shipper Name",
+      "regex": "^[a-zA-Z0-9 .]{1,60}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "shipperAddress": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 45,
+      "description": "Shipper Address",
+      "title": "Shipper Address",
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "shipperAddress2": {
+      "type": ["string", "null"],
+      "title": "Shipper Address 2",
+      "description": "Shipper Address 2",
+      "minLength": 1,
+      "maxLength": 45,
+      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
+      "fieldNoDashesAndDots": true,
+      "fieldTrim": true
+    },
+    "shipperUnitNumber": {
+      "type": ["string", "null"],
+      "title": "Shipper Unit Number",
+      "description": "Shipper Unit Number",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeFeiOrDuns": {
+    "shipperCity": {
+      "type": "string",
+      "title": "Shipper City",
+      "minLength": 1,
+      "maxLength": 21,
+      "fieldNoDashesAndDots": true,
+      "description": "Shipper City"
+    },
+    "shipperStateOrProvince": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeFeiOrDuns",
-      "description": "ultimateConsigneeFeiOrDuns",
+      "title": "Shipper State Or Province",
+      "minLength": 2,
+      "maxLength": 3,
+      "description": "Shipper State Or Province"
+    },
+    "shipperCountry": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 2,
+      "title": "Shipper Country",
+      "description": "Shipper Country"
+    },
+    "shipperZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "Shipper Postal Code",
+      "description": "Shipper Postal Code",
+      "minLength": 3,
+      "maxLength": 9
+    },
+    "shipperPointOfContactName": {
+      "type": "string",
+      "title": "Shipper Contact Name",
+      "description": "Shipper Contact Name",
+      "minLength": 2,
+      "maxLength": 23
+    },
+    "shipperPointOfContactPhone": {
+      "type": "string",
+      "title": "Shipper Contact Phone",
+      "description": "Shipper Contact Phone",
+      "minLength": 5,
+      "maxLength": 15
+    },
+    "shipperPointOfContactEmail": {
+      "type": "string",
+      "title": "Shipper Contact Email",
+      "description": "Shipper Contact Email",
+      "minLength": 7,
+      "maxLength": 35
+    },
+    "locationOfGoodsFeiOrDunsCode": {
+      "type": ["string", "null"],
+      "title": "location Of Goods Fei Or Duns Code",
+      "description": "location Of Goods Fei Or Duns Code",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeName": {
+    "locationOfGoodsFeiOrDuns": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeName",
-      "description": "ultimateConsigneeName",
+      "title": "location Of Goods Fei Or Duns",
+      "description": "location Of Goods Fei Or Duns",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeAddress": {
+    "locationOfGoodsName": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeAddress",
-      "description": "ultimateConsigneeAddress",
+      "title": "location Of Goods Name",
+      "description": "location Of Goods Name",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeAddress2": {
+    "locationOfGoodsAddress": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeAddress2",
-      "description": "ultimateConsigneeAddress2",
+      "title": "location Of Goods Address",
+      "description": "location Of Goods Address",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeUnitNumber": {
+    "locationOfGoodsAddress2": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeUnitNumber",
-      "description": "ultimateConsigneeUnitNumber",
+      "title": "locationOfGoodsAddress2",
+      "description": "locationOfGoodsAddress2",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeCity": {
+    "locationOfGoodsUnitNumber": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeCity",
-      "description": "ultimateConsigneeCity",
+      "title": "locationOfGoodsUnitNumber",
+      "description": "locationOfGoodsUnitNumber",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeStateOrProvince": {
+    "locationOfGoodsCity": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeStateOrProvince",
-      "description": "ultimateConsigneeStateOrProvince",
+      "title": "locationOfGoodsCity",
+      "description": "locationOfGoodsCity",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeCountry": {
+    "locationOfGoodsStateOrProvince": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeCountry",
-      "description": "ultimateConsigneeCountry",
+      "title": "locationOfGoodsStateOrProvince",
+      "description": "locationOfGoodsStateOrProvince",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneeZipPostalCode": {
+    "locationOfGoodsCountry": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneeZipPostalCode",
-      "description": "ultimateConsigneeZipPostalCode",
+      "title": "locationOfGoodsCountry",
+      "description": "locationOfGoodsCountry",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneePointOfContactName": {
+    "locationOfGoodsZipPostalCode": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneePointOfContactName",
-      "description": "ultimateConsigneePointOfContactName",
+      "title": "locationOfGoodsZipPostalCode",
+      "description": "locationOfGoodsZipPostalCode",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneePointOfContactPhone": {
+    "locationOfGoodsPointOfContactName": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneePointOfContactPhone",
-      "description": "ultimateConsigneePointOfContactPhone",
+      "title": "locationOfGoodsPointOfContactName",
+      "description": "locationOfGoodsPointOfContactName",
       "minLength": 1,
       "maxLength": 45
     },
-    "ultimateConsigneePointOfContactEmail": {
+    "locationOfGoodsPointOfContactPhone": {
       "type": ["string", "null"],
-      "title": "ultimateConsigneePointOfContactEmail",
-      "description": "ultimateConsigneePointOfContactEmail",
+      "title": "locationOfGoodsPointOfContactPhone",
+      "description": "locationOfGoodsPointOfContactPhone",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "locationOfGoodsPointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "locationOfGoodsPointOfContactEmail",
+      "description": "locationOfGoodsPointOfContactEmail",
       "minLength": 1,
       "maxLength": 45
     },
@@ -727,108 +776,96 @@
       "minLength": 7,
       "maxLength": 35
     },
-    "shipperFeiOrDunsCode": {
+    "ultimateConsigneeFeiOrDunsCode": {
       "type": ["string", "null"],
-      "title": "Shipper FEI Or DUNS Code",
-      "description": "Shipper FEI Or DUNS Code",
-      "minLength": 1,
-      "maxLength": 45,
-      "enum": [null, "16", "47"]
-    },
-    "shipperFeiOrDuns": {
-      "type": ["string", "null"],
-      "title": "Shipper FEI Or DUNS",
-      "description": "Shipper FEI Or DUNS",
-      "minLength": 1,
-      "maxLength": 45,
-      "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
-    },
-    "shipperName": {
-      "type": ["string", "null"],
-      "minLength": 1,
-      "maxLength": 45,
-      "description": "Shipper Name",
-      "title": "Shipper Name",
-      "regex": "^[a-zA-Z0-9 .]{1,60}$",
-      "fieldNoDashesAndDots": true,
-      "fieldTrim": true
-    },
-    "shipperAddress": {
-      "type": ["string", "null"],
-      "minLength": 1,
-      "maxLength": 45,
-      "description": "Shipper Address",
-      "title": "Shipper Address",
-      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
-      "fieldNoDashesAndDots": true,
-      "fieldTrim": true
-    },
-    "shipperAddress2": {
-      "type": ["string", "null"],
-      "title": "Shipper Address 2",
-      "description": "Shipper Address 2",
-      "minLength": 1,
-      "maxLength": 45,
-      "regex": "^[^<>%$:ñÑà-ü]{1,45}$",
-      "fieldNoDashesAndDots": true,
-      "fieldTrim": true
-    },
-    "shipperUnitNumber": {
-      "type": ["string", "null"],
-      "title": "Shipper Unit Number",
-      "description": "Shipper Unit Number",
+      "title": "ultimateConsigneeFeiOrDunsCode",
+      "description": "ultimateConsigneeFeiOrDunsCode",
       "minLength": 1,
       "maxLength": 45
     },
-    "shipperCity": {
+    "ultimateConsigneeFeiOrDuns": {
       "type": ["string", "null"],
-      "title": "Shipper City",
+      "title": "ultimateConsigneeFeiOrDuns",
+      "description": "ultimateConsigneeFeiOrDuns",
       "minLength": 1,
-      "maxLength": 21,
-      "fieldNoDashesAndDots": true,
-      "description": "Shipper City"
+      "maxLength": 45
     },
-    "shipperStateOrProvince": {
+    "ultimateConsigneeName": {
       "type": ["string", "null"],
-      "title": "Shipper State Or Province",
-      "minLength": 2,
-      "maxLength": 3,
-      "description": "Shipper State Or Province"
+      "title": "ultimateConsigneeName",
+      "description": "ultimateConsigneeName",
+      "minLength": 1,
+      "maxLength": 45
     },
-    "shipperCountry": {
+    "ultimateConsigneeAddress": {
       "type": ["string", "null"],
-      "minLength": 2,
-      "maxLength": 2,
-      "title": "Shipper Country",
-      "description": "Shipper Country"
+      "title": "ultimateConsigneeAddress",
+      "description": "ultimateConsigneeAddress",
+      "minLength": 1,
+      "maxLength": 45
     },
-    "shipperZipPostalCode": {
+    "ultimateConsigneeAddress2": {
       "type": ["string", "null"],
-      "title": "Shipper Postal Code",
-      "description": "Shipper Postal Code",
-      "minLength": 3,
-      "maxLength": 9
+      "title": "ultimateConsigneeAddress2",
+      "description": "ultimateConsigneeAddress2",
+      "minLength": 1,
+      "maxLength": 45
     },
-    "shipperPointOfContactName": {
+    "ultimateConsigneeUnitNumber": {
       "type": ["string", "null"],
-      "title": "Shipper Contact Name",
-      "description": "Shipper Contact Name",
-      "minLength": 2,
-      "maxLength": 23
+      "title": "ultimateConsigneeUnitNumber",
+      "description": "ultimateConsigneeUnitNumber",
+      "minLength": 1,
+      "maxLength": 45
     },
-    "shipperPointOfContactPhone": {
+    "ultimateConsigneeCity": {
       "type": ["string", "null"],
-      "title": "Shipper Contact Phone",
-      "description": "Shipper Contact Phone",
-      "minLength": 5,
-      "maxLength": 15
+      "title": "ultimateConsigneeCity",
+      "description": "ultimateConsigneeCity",
+      "minLength": 1,
+      "maxLength": 45
     },
-    "shipperPointOfContactEmail": {
+    "ultimateConsigneeStateOrProvince": {
       "type": ["string", "null"],
-      "title": "Shipper Contact Email",
-      "description": "Shipper Contact Email",
-      "minLength": 7,
-      "maxLength": 35
+      "title": "ultimateConsigneeStateOrProvince",
+      "description": "ultimateConsigneeStateOrProvince",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeCountry": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeCountry",
+      "description": "ultimateConsigneeCountry",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneeZipPostalCode": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneeZipPostalCode",
+      "description": "ultimateConsigneeZipPostalCode",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneePointOfContactName": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneePointOfContactName",
+      "description": "ultimateConsigneePointOfContactName",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneePointOfContactPhone": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneePointOfContactPhone",
+      "description": "ultimateConsigneePointOfContactPhone",
+      "minLength": 1,
+      "maxLength": 45
+    },
+    "ultimateConsigneePointOfContactEmail": {
+      "type": ["string", "null"],
+      "title": "ultimateConsigneePointOfContactEmail",
+      "description": "ultimateConsigneePointOfContactEmail",
+      "minLength": 1,
+      "maxLength": 45
     },
     "ownerFeiOrDunsCode": {
       "type": ["string", "null"],
@@ -921,213 +958,3254 @@
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsFeiOrDunsCode": {
+    "pointOfContactFeiOrDunsCode": {
       "type": ["string", "null"],
-      "title": "location Of Goods Fei Or Duns Code",
-      "description": "location Of Goods Fei Or Duns Code",
+      "title": "pointOfContactFeiOrDunsCode",
+      "description": "pointOfContactFeiOrDunsCode",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsFeiOrDuns": {
+    "pointOfContactFeiOrDuns": {
       "type": ["string", "null"],
-      "title": "location Of Goods Fei Or Duns",
-      "description": "location Of Goods Fei Or Duns",
+      "title": "pointOfContactFeiOrDuns",
+      "description": "pointOfContactFeiOrDuns",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsName": {
+    "pointOfContactName": {
       "type": ["string", "null"],
-      "title": "location Of Goods Name",
-      "description": "location Of Goods Name",
+      "title": "Point Of Contact Name",
+      "description": "Point Of Contact Name",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsAddress": {
+    "pointOfContactAddress": {
       "type": ["string", "null"],
-      "title": "location Of Goods Address",
-      "description": "location Of Goods Address",
+      "title": "pointOfContactAddress",
+      "description": "pointOfContactAddress",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsAddress2": {
+    "pointOfContactAddress2": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsAddress2",
-      "description": "locationOfGoodsAddress2",
+      "title": "pointOfContactAddress2",
+      "description": "pointOfContactAddress2",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsUnitNumber": {
+    "pointOfContactUnitNumber": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsUnitNumber",
-      "description": "locationOfGoodsUnitNumber",
+      "title": "pointOfContactUnitNumber",
+      "description": "pointOfContactUnitNumber",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsCity": {
+    "pointOfContactCity": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsCity",
-      "description": "locationOfGoodsCity",
+      "title": "pointOfContactCity",
+      "description": "pointOfContactCity",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsStateOrProvince": {
+    "pointOfContactStateOrProvince": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsStateOrProvince",
-      "description": "locationOfGoodsStateOrProvince",
+      "title": "pointOfContactStateOrProvince",
+      "description": "pointOfContactStateOrProvince",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsCountry": {
+    "pointOfContactCountry": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsCountry",
-      "description": "locationOfGoodsCountry",
+      "title": "pointOfContactCountry",
+      "description": "pointOfContactCountry",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsZipPostalCode": {
+    "pointOfContactZipPostalCode": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsZipPostalCode",
-      "description": "locationOfGoodsZipPostalCode",
+      "title": "pointOfContactZipPostalCode",
+      "description": "pointOfContactZipPostalCode",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsPointOfContactName": {
+    "pointOfContactPointOfContactName": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsPointOfContactName",
-      "description": "locationOfGoodsPointOfContactName",
+      "title": "pointOfContactPointOfContactName",
+      "description": "pointOfContactPointOfContactName",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsPointOfContactPhone": {
+    "pointOfContactPointOfContactPhone": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsPointOfContactPhone",
-      "description": "locationOfGoodsPointOfContactPhone",
+      "title": "pointOfContactPointOfContactPhone",
+      "description": "pointOfContactPointOfContactPhone",
       "minLength": 1,
       "maxLength": 45
     },
-    "locationOfGoodsPointOfContactEmail": {
+    "pointOfContactPointOfContactEmail": {
       "type": ["string", "null"],
-      "title": "locationOfGoodsPointOfContactEmail",
-      "description": "locationOfGoodsPointOfContactEmail",
+      "title": "pointOfContactPointOfContactEmail",
+      "description": "pointOfContactPointOfContactEmail",
       "minLength": 1,
       "maxLength": 45
-    },
-    "foreignSupplierVerificationProgramImporterFeiOrDunsCode": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Fei Or Duns Code",
-      "description": "Foreign Supplier Verification Program Importer Fei Or Duns Code",
-      "minLength": 2,
-      "maxLength": 2,
-      "enum": [null, "16", "47"]
-    },
-    "foreignSupplierVerificationProgramImporterFeiOrDuns": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Fei Or Duns",
-      "description": "Foreign Supplier Verification Program Importer Fei Or Duns",
-      "minLength": 1,
-      "maxLength": 10,
-      "regex": "^[\\d]{9}$|^[\\d]{1,10}$"
-    },
-    "foreignSupplierVerificationProgramImporterName": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Name",
-      "description": "Foreign Supplier Verification Program Importer Name",
-      "minLength": 1,
-      "maxLength": 45
-    },
-    "foreignSupplierVerificationProgramImporterAddress": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Address",
-      "description": "Foreign Supplier Verification Program Importer Address",
-      "minLength": 1,
-      "maxLength": 45
-    },
-    "foreignSupplierVerificationProgramImporterAddress2": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Address 2",
-      "description": "Foreign Supplier Verification Program Importer Address 2",
-      "minLength": 1,
-      "maxLength": 45
-    },
-    "foreignSupplierVerificationProgramImporterUnitNumber": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Unit Number",
-      "description": "Foreign Supplier Verification Program Importer Unit Number",
-      "minLength": 1,
-      "maxLength": 45
-    },
-    "foreignSupplierVerificationProgramImporterCity": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer City",
-      "description": "Foreign Supplier Verification Program Importer City",
-      "minLength": 1,
-      "maxLength": 21
-    },
-    "foreignSupplierVerificationProgramImporterStateOrProvince": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer State Or Province",
-      "description": "Foreign Supplier Verification Program Importer State Or Province",
-      "minLength": 2,
-      "maxLength": 3
-    },
-    "foreignSupplierVerificationProgramImporterCountry": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Country",
-      "description": "Foreign Supplier Verification Program Importer Country",
-      "minLength": 2,
-      "maxLength": 2
-    },
-    "foreignSupplierVerificationProgramImporterZipPostalCode": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Postal Code",
-      "description": "Foreign Supplier Verification Program Importer Postal Code",
-      "minLength": 3,
-      "maxLength": 9
-    },
-    "foreignSupplierVerificationProgramImporterPointOfContactName": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Point Of Contact Name",
-      "description": "Foreign Supplier Verification Program Importer Point Of Contact Name",
-      "minLength": 2,
-      "maxLength": 23,
-      "regex": "^[^<>%$:ñÑà-ü]{2,23}$"
-    },
-    "foreignSupplierVerificationProgramImporterPointOfContactPhone": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Point Of Contact Phone",
-      "description": "Foreign Supplier Verification Program Importer Point Of Contact Phone",
-      "minLength": 5,
-      "maxLength": 15,
-      "regex": "^[^<>%$:ñÑà-ü]{5,15}$"
-    },
-    "foreignSupplierVerificationProgramImporterPointOfContactEmail": {
-      "type": ["string", "null"],
-      "title": "Foreign Supplier Verification Program Importer Point Of Contact Email",
-      "description": "Foreign Supplier Verification Program Importer Point Of Contact Email",
-      "minLength": 7,
-      "maxLength": 35,
-      "regex": "^[^<>%$:ñÑà-ü]{7,35}$"
     },
     "packaging": {
       "type": "array",
-      "minItems": 3,
-      "additionalItems": false,
-      "items": [
-        { "type": "number" },
-        { "enum": ["Street", "Avenue", "Boulevard"] },
-        { "enum": ["NW", "NE", "SW", "SE"] }
-      ]
+      "minItems": 1,
+      "additionalItems": false
     }
   },
+  "allOf": [
+    {
+      "properties": {
+        "packaging": {
+          "oneOf": [
+            {
+              "minItems": 1,
+              "items": [
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 1
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "BBL",
+                                "BOL",
+                                "CAR",
+                                "CAP",
+                                "CFT",
+                                "CG",
+                                "CM3",
+                                "CYD",
+                                "DOZ",
+                                "DPC",
+                                "DPR",
+                                "FOZ",
+                                "G",
+                                "GAL",
+                                "GR",
+                                "KG",
+                                "KM3",
+                                "L",
+                                "LB",
+                                "M3",
+                                "MCG",
+                                "MG",
+                                "ML",
+                                "NO",
+                                "OZ",
+                                "PCS",
+                                "PRS",
+                                "PTL",
+                                "QTL",
+                                "STN",
+                                "T",
+                                "Tab",
+                                "TON",
+                                "TOZ"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "minItems": 2,
+              "items": [
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 1
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 2
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "BBL",
+                                "BOL",
+                                "CAR",
+                                "CAP",
+                                "CFT",
+                                "CG",
+                                "CM3",
+                                "CYD",
+                                "DOZ",
+                                "DPC",
+                                "DPR",
+                                "FOZ",
+                                "G",
+                                "GAL",
+                                "GR",
+                                "KG",
+                                "KM3",
+                                "L",
+                                "LB",
+                                "M3",
+                                "MCG",
+                                "MG",
+                                "ML",
+                                "NO",
+                                "OZ",
+                                "PCS",
+                                "PRS",
+                                "PTL",
+                                "QTL",
+                                "STN",
+                                "T",
+                                "Tab",
+                                "TON",
+                                "TOZ"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "minItems": 3,
+              "items": [
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 1
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 2
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 3
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "BBL",
+                                "BOL",
+                                "CAR",
+                                "CAP",
+                                "CFT",
+                                "CG",
+                                "CM3",
+                                "CYD",
+                                "DOZ",
+                                "DPC",
+                                "DPR",
+                                "FOZ",
+                                "G",
+                                "GAL",
+                                "GR",
+                                "KG",
+                                "KM3",
+                                "L",
+                                "LB",
+                                "M3",
+                                "MCG",
+                                "MG",
+                                "ML",
+                                "NO",
+                                "OZ",
+                                "PCS",
+                                "PRS",
+                                "PTL",
+                                "QTL",
+                                "STN",
+                                "T",
+                                "Tab",
+                                "TON",
+                                "TOZ"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "minItems": 4,
+              "items": [
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 1
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 2
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 3
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 4
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "BBL",
+                                "BOL",
+                                "CAR",
+                                "CAP",
+                                "CFT",
+                                "CG",
+                                "CM3",
+                                "CYD",
+                                "DOZ",
+                                "DPC",
+                                "DPR",
+                                "FOZ",
+                                "G",
+                                "GAL",
+                                "GR",
+                                "KG",
+                                "KM3",
+                                "L",
+                                "LB",
+                                "M3",
+                                "MCG",
+                                "MG",
+                                "ML",
+                                "NO",
+                                "OZ",
+                                "PCS",
+                                "PRS",
+                                "PTL",
+                                "QTL",
+                                "STN",
+                                "T",
+                                "Tab",
+                                "TON",
+                                "TOZ"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "minItems": 5,
+              "items": [
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 1
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 2
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 3
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 4
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 5
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "BBL",
+                                "BOL",
+                                "CAR",
+                                "CAP",
+                                "CFT",
+                                "CG",
+                                "CM3",
+                                "CYD",
+                                "DOZ",
+                                "DPC",
+                                "DPR",
+                                "FOZ",
+                                "G",
+                                "GAL",
+                                "GR",
+                                "KG",
+                                "KM3",
+                                "L",
+                                "LB",
+                                "M3",
+                                "MCG",
+                                "MG",
+                                "ML",
+                                "NO",
+                                "OZ",
+                                "PCS",
+                                "PRS",
+                                "PTL",
+                                "QTL",
+                                "STN",
+                                "T",
+                                "Tab",
+                                "TON",
+                                "TOZ"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "minItems": 6,
+              "items": [
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 1
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 2
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 3
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 4
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 5
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "const": 6
+                        }
+                      }
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "enum": [
+                                "BBL",
+                                "BOL",
+                                "CAR",
+                                "CAP",
+                                "CFT",
+                                "CG",
+                                "CM3",
+                                "CYD",
+                                "DOZ",
+                                "DPC",
+                                "DPR",
+                                "FOZ",
+                                "G",
+                                "GAL",
+                                "GR",
+                                "KG",
+                                "KM3",
+                                "L",
+                                "LB",
+                                "M3",
+                                "MCG",
+                                "MG",
+                                "ML",
+                                "NO",
+                                "OZ",
+                                "PCS",
+                                "PRS",
+                                "PTL",
+                                "QTL",
+                                "STN",
+                                "T",
+                                "Tab",
+                                "TON",
+                                "TOZ"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
   "required": [
     "entryType",
     "referenceQualifier",
-    "referenceNumber",
     "dateOfArrival",
+    "timeOfArrival",
     "billType",
     "modeOfTransport",
+    "portOfArrival",
+    "htsCode",
     "governmentAgencyProgramCode",
+    "governmentAgencyProcessingCode",
+    "productCodeNumber",
     "sourceTypeCode",
-    "packaging"
+    "countryOfOrigin",
+    "productDescription",
+    "remarks",
+    "pnSubmitterName",
+    "pnSubmitterCity",
+    "pnSubmitterCountry",
+    "pnSubmitterPointOfContactName",
+    "pnSubmitterPointOfContactPhone",
+    "pnSubmitterPointOfContactEmail",
+    "pnTransmitterName",
+    "pnTransmitterCity",
+    "pnTransmitterCountry",
+    "pnTransmitterPointOfContactName",
+    "pnTransmitterPointOfContactPhone",
+    "pnTransmitterPointOfContactEmail",
+    "manufacturerOfGoodsName",
+    "manufacturerOfGoodsCity",
+    "manufacturerOfGoodsCountry",
+    "manufacturerOfGoodsPointOfContactName",
+    "manufacturerOfGoodsPointOfContactPhone",
+    "manufacturerOfGoodsPointOfContactEmail",
+    "shipperName",
+    "shipperCity",
+    "shipperCountry",
+    "shipperPointOfContactName",
+    "shipperPointOfContactPhone",
+    "shipperPointOfContactEmail"
   ]
 }

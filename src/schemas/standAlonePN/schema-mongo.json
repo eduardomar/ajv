@@ -1,0 +1,1013 @@
+{
+  "_id": "stand-alone-pn",
+  "includes": ["ocean-fields", "product-fields"],
+  "content": {
+    "id$": "stand-alone-pn.json",
+    "type": "object",
+    "properties": {
+      "entryType": {
+        "type": "string",
+        "title": "Entry Type",
+        "description": "A code representing the entry type: 01 = Consumption – Free and Dutiable, 02 = Consumption - Quota/Visa, 03 = Consumption - Antidumping/ Countervailing Duty, 07 = Consumption - Antidumping/ Countervailing Duty & Quota/Visa Combination, 11 = Informal – Free and Dutiable, 12 = Informal - Quota/Visa (other than textiles), 21 = Warehouse, 23 = Temporary Importation Bond (TIB), 52 = Government Dutiable, 61 = Immediate Transportation, 62 = Transportation and Exportation, 81 = FTZ Admission",
+        "minLength": 2,
+        "maxLength": 2,
+        "enum": [
+          "01",
+          "02",
+          "03",
+          "07",
+          "11",
+          "12",
+          "21",
+          "23",
+          "52",
+          "61",
+          "62",
+          "81"
+        ]
+      },
+      "referenceQualifier": {
+        "type": "string",
+        "title": "Reference Qualifier",
+        "description": "Code that defines the Reference Identifier Number being provided: ENT = Entry number, BOL = Bill of Lading Number (Ocean, Rail or Truck), AWB = Air waybill, FTZ = FTZ admission number, INB = In-bond number",
+        "minLength": 3,
+        "maxLength": 3,
+        "enum": ["ENT", "BOL", "AWB", "FTZ", "INB"]
+      },
+      "referenceNumber": {
+        "type": "string",
+        "title": "Reference Number",
+        "description": "The unique identifying number associated to the Reference Qualifier Code. For a bill of lading number it is the number as listed on the manifest or the In-Bond number.",
+        "minLength": 1,
+        "maxLength": 36
+      },
+      "dateOfArrival": {
+        "ref$": "ocean-fields.json#/definitions/estimateDateOfArrival"
+      },
+      "billType": {
+        "type": "string",
+        "title": "Bill Type",
+        "description": "R = Regular / Simple Bill of Lading; Shipment Control Number (Mode Truck), M = Master Bill of Lading; Shipment Control Number (Mode Truck), T = Express Carrier Tracking Number (air only)",
+        "minLength": 1,
+        "maxLength": 1,
+        "enum": ["R", "M", "T"]
+      },
+      "timeOfArrival": {
+        "ref$": "ocean-fields.json#/definitions/timeOfArrival",
+        "type": "number"
+      },
+      "modeOfTransport": {
+        "type": "string",
+        "title": "Mode of Transportation (MOT) Code",
+        "description": "A code representing the mode of transportation: 10 = Vessel, Non-container, 11 = Vessel, Container, 12 = Border Water-borne (only Mexico and Canada), 20 = Rail, Non-container, 21 = Rail, Container, 30 = Truck, Non-container, 31 = Truck, Container, 32 = Auto, 33 = Pedestrian, 34 = Road, other. Includes foot and animal-borne., 40 = Air, Non-container, 41 = Air, Container, 50 = Mail, 60 = Passenger, Hand Carried, 70 = Fixed Transport Installations. Includes pipeline and powerhouse.",
+        "minLength": 2,
+        "maxLength": 2,
+        "enum": [
+          "10",
+          "11",
+          "12",
+          "20",
+          "21",
+          "30",
+          "31",
+          "32",
+          "33",
+          "34",
+          "40",
+          "41",
+          "50",
+          "60",
+          "70"
+        ]
+      },
+      "pncNumber": {
+        "type": ["string", "null"],
+        "title": "Prior Notice Confirmation Number",
+        "description": "The confirmation number received from FDA when prior notice is received.",
+        "minLength": 1,
+        "maxLength": 12
+      },
+      "portOfArrival": {
+        "ref$": "ocean-fields.json#/definitions/USPortOfArrival",
+        "type": "string"
+      },
+      "htsCode": {
+        "ref$": "product-fields.json#/definitions/htsCode",
+        "type": "string"
+      },
+      "governmentAgencyProgramCode": {
+        "ref$": "product-fields.json#/definitions/programCode",
+        "type": "string",
+        "description": "FOO = Food*",
+        "const": "FOO"
+      },
+      "governmentAgencyProcessingCode": {
+        "ref$": "product-fields.json#/definitions/fdaAgencyProcessingCode",
+        "type": "string",
+        "enum": ["NSF", "PRO", "FEE", "ADD", "DSU"]
+      },
+      "intendedUseCode": {
+        "type": ["string", "null"],
+        "title": "Intended Use Code",
+        "description": "Intended Use Code",
+        "minLength": 1,
+        "maxLength": 7,
+        "regexFrontend": "\\d\\d\\d.\\d\\d\\d"
+      },
+      "productCodeNumber": {
+        "ref$": "product-fields.json#/definitions/fdaProductCodeNumber",
+        "type": "string",
+        "regexFrontend": "^(((((0[2-579]|1[2-8]|2[0-9]|3[0-9]|4[0-25-6]|69|7[0-2])[A-Z])|(50[C-GL]|52D))[A-Z-])|(54[A-Z][A-CL-MY]))[A-Z-][A-Z0-9]{2}$"
+      },
+      "sourceTypeCode": {
+        "ref$": "product-fields.json#/definitions/fdaSourceTypeCode",
+        "type": "string",
+        "enum": ["262", "39", "CSH", "294"]
+      },
+      "countryOfOrigin": {
+        "ref$": "product-fields.json#/definitions/fdaCountryOfOrigin",
+        "type": "string"
+      },
+      "productDescription": {
+        "ref$": "product-fields.json#/definitions/fdaProductDescription",
+        "type": "string"
+      },
+      "remarks": {
+        "ref$": "product-fields.json#/definitions/fdaRemarks",
+        "type": "string"
+      },
+      "affirmationOfCompliance": {
+        "type": "array",
+        "items": {
+          "code": {
+            "ref$": "product-fields.json#/definitions/affirmationCode1"
+          },
+          "qualifier": {
+            "ref$": "product-fields.json#/definitions/affirmationValue1"
+          }
+        }
+      },
+      "pnSubmitterFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterFeiOrDunsCode"
+      },
+      "pnSubmitterFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterFeiOrDuns"
+      },
+      "pnSubmitterName": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterName",
+        "type": "string"
+      },
+      "pnSubmitterAddress": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterAddress"
+      },
+      "pnSubmitterAddress2": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterAddress2"
+      },
+      "pnSubmitterUnitNumber": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterUnitNumber"
+      },
+      "pnSubmitterCity": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterCity",
+        "type": "string"
+      },
+      "pnSubmitterStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterStateOrProvince"
+      },
+      "pnSubmitterCountry": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterCountry",
+        "type": "string"
+      },
+      "pnSubmitterZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterZipPostalCode"
+      },
+      "pnSubmitterPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterPointOfContactName",
+        "type": "string"
+      },
+      "pnSubmitterPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterPointOfContactPhone",
+        "type": "string"
+      },
+      "pnSubmitterPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/pnSubmitterPointOfContactEmail",
+        "type": "string"
+      },
+      "pnTransmitterFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterFeiOrDunsCode"
+      },
+      "pnTransmitterFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterFeiOrDuns"
+      },
+      "pnTransmitterName": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterName",
+        "type": "string"
+      },
+      "pnTransmitterAddress": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterAddress"
+      },
+      "pnTransmitterAddress2": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterAddress2"
+      },
+      "pnTransmitterUnitNumber": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterUnitNumber"
+      },
+      "pnTransmitterCity": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterCity",
+        "type": "string"
+      },
+      "pnTransmitterStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterStateOrProvince"
+      },
+      "pnTransmitterCountry": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterCountry",
+        "type": "string"
+      },
+      "pnTransmitterZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterZipPostalCode"
+      },
+      "pnTransmitterPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterPointOfContactName",
+        "type": "string"
+      },
+      "pnTransmitterPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterPointOfContactPhone",
+        "type": "string"
+      },
+      "pnTransmitterPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/pnTransmitterPointOfContactEmail",
+        "type": "string"
+      },
+      "manufacturerOfGoodsFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/manufacturerFeiOrDunsCode"
+      },
+      "manufacturerOfGoodsFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/manufacturerFeiOrDuns"
+      },
+      "manufacturerOfGoodsName": {
+        "ref$": "product-fields.json#/definitions/manufacturerName",
+        "type": "string"
+      },
+      "manufacturerOfGoodsAddress": {
+        "ref$": "product-fields.json#/definitions/manufacturerAddress"
+      },
+      "manufacturerOfGoodsAddress2": {
+        "ref$": "product-fields.json#/definitions/manufacturerAddress2"
+      },
+      "manufacturerOfGoodsUnitNumber": {
+        "ref$": "product-fields.json#/definitions/manufacturerUnitNumber"
+      },
+      "manufacturerOfGoodsCity": {
+        "ref$": "product-fields.json#/definitions/manufacturerCity",
+        "type": "string"
+      },
+      "manufacturerOfGoodsStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/manufacturerStateOrProvince"
+      },
+      "manufacturerOfGoodsCountry": {
+        "ref$": "product-fields.json#/definitions/manufacturerCountry",
+        "type": "string"
+      },
+      "manufacturerOfGoodsZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/manufacturerPostalCode"
+      },
+      "manufacturerOfGoodsPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/manufacturerContactName",
+        "type": "string"
+      },
+      "manufacturerOfGoodsPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/manufacturerContactPhone",
+        "type": "string"
+      },
+      "manufacturerOfGoodsPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/manufacturerContactEmail",
+        "type": "string"
+      },
+      "shipperFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/shipperFeiOrDunsCode"
+      },
+      "shipperFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/shipperFeiOrDuns"
+      },
+      "shipperName": {
+        "ref$": "product-fields.json#/definitions/shipperName",
+        "type": "string"
+      },
+      "shipperAddress": {
+        "ref$": "product-fields.json#/definitions/shipperAddress"
+      },
+      "shipperAddress2": {
+        "ref$": "product-fields.json#/definitions/shipperAddress2"
+      },
+      "shipperUnitNumber": {
+        "ref$": "product-fields.json#/definitions/shipperUnitNumber"
+      },
+      "shipperCity": {
+        "ref$": "product-fields.json#/definitions/shipperCity",
+        "type": "string"
+      },
+      "shipperStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/shipperStateOrProvince"
+      },
+      "shipperCountry": {
+        "ref$": "product-fields.json#/definitions/shipperCountry",
+        "type": "string"
+      },
+      "shipperZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/shipperPostalCode"
+      },
+      "shipperPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/shipperContactName",
+        "type": "string"
+      },
+      "shipperPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/shipperContactPhone",
+        "type": "string"
+      },
+      "shipperPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/shipperContactEmail",
+        "type": "string"
+      },
+      "locationOfGoodsFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsFeiOrDunsCode"
+      },
+      "locationOfGoodsFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsFeiOrDuns"
+      },
+      "locationOfGoodsName": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsName"
+      },
+      "locationOfGoodsAddress": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsAddress"
+      },
+      "locationOfGoodsAddress2": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsAddress2"
+      },
+      "locationOfGoodsUnitNumber": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsUnitNumber"
+      },
+      "locationOfGoodsCity": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsCity"
+      },
+      "locationOfGoodsStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsStateOrProvince"
+      },
+      "locationOfGoodsCountry": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsCountry"
+      },
+      "locationOfGoodsZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsZipPostalCode"
+      },
+      "locationOfGoodsPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsPointOfContactName"
+      },
+      "locationOfGoodsPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsPointOfContactPhone"
+      },
+      "locationOfGoodsPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/locationOfGoodsPointOfContactEmail"
+      },
+      "fdaImporterFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/fdaImporterFeiOrDunsCode"
+      },
+      "fdaImporterFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/fdaImporterFeiOrDuns"
+      },
+      "fdaImporterName": {
+        "ref$": "product-fields.json#/definitions/fdaImporterName"
+      },
+      "fdaImporterAddress": {
+        "ref$": "product-fields.json#/definitions/fdaImporterAddress"
+      },
+      "fdaImporterAddress2": {
+        "ref$": "product-fields.json#/definitions/fdaImporterAddress2"
+      },
+      "fdaImporterUnitNumber": {
+        "ref$": "product-fields.json#/definitions/fdaImporterUnitNumber"
+      },
+      "fdaImporterCity": {
+        "ref$": "product-fields.json#/definitions/fdaImporterCity"
+      },
+      "fdaImporterStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/fdaImporterStateOrProvince"
+      },
+      "fdaImporterCountry": {
+        "ref$": "product-fields.json#/definitions/fdaImporterCountry"
+      },
+      "fdaImporterZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/fdaImporterPostalCode"
+      },
+      "fdaImporterPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/fdaImporterContactName"
+      },
+      "fdaImporterPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/fdaImporterContactPhone"
+      },
+      "fdaImporterPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/fdaImporterContactEmail"
+      },
+      "ultimateConsigneeFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeFeiOrDunsCode"
+      },
+      "ultimateConsigneeFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeFeiOrDuns"
+      },
+      "ultimateConsigneeName": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeName"
+      },
+      "ultimateConsigneeAddress": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeAddress"
+      },
+      "ultimateConsigneeAddress2": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeAddress2"
+      },
+      "ultimateConsigneeUnitNumber": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeUnitNumber"
+      },
+      "ultimateConsigneeCity": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeCity"
+      },
+      "ultimateConsigneeStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeStateOrProvince"
+      },
+      "ultimateConsigneeCountry": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeCountry"
+      },
+      "ultimateConsigneeZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneeZipPostalCode"
+      },
+      "ultimateConsigneePointOfContactName": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneePointOfContactName"
+      },
+      "ultimateConsigneePointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneePointOfContactPhone"
+      },
+      "ultimateConsigneePointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/ultimateConsigneePointOfContactEmail"
+      },
+      "ownerFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/ownerFeiOrDunsCode"
+      },
+      "ownerFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/ownerFeiOrDuns"
+      },
+      "ownerName": {
+        "ref$": "product-fields.json#/definitions/ownerName"
+      },
+      "ownerAddress": {
+        "ref$": "product-fields.json#/definitions/ownerAddress"
+      },
+      "ownerAddress2": {
+        "ref$": "product-fields.json#/definitions/ownerAddress2"
+      },
+      "ownerUnitNumber": {
+        "ref$": "product-fields.json#/definitions/ownerUnitNumber"
+      },
+      "ownerCity": {
+        "ref$": "product-fields.json#/definitions/ownerCity"
+      },
+      "ownerStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/ownerStateOrProvince"
+      },
+      "ownerCountry": {
+        "ref$": "product-fields.json#/definitions/ownerCountry"
+      },
+      "ownerZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/ownerZipPostalCode"
+      },
+      "ownerPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/ownerPointOfContactName"
+      },
+      "ownerPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/ownerPointOfContactPhone"
+      },
+      "ownerPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/ownerPointOfContactEmail"
+      },
+      "pointOfContactFeiOrDunsCode": {
+        "ref$": "product-fields.json#/definitions/pointOfContactFeiOrDunsCode"
+      },
+      "pointOfContactFeiOrDuns": {
+        "ref$": "product-fields.json#/definitions/pointOfContactFeiOrDuns"
+      },
+      "pointOfContactName": {
+        "ref$": "product-fields.json#/definitions/pointOfContactName"
+      },
+      "pointOfContactAddress": {
+        "ref$": "product-fields.json#/definitions/pointOfContactAddress"
+      },
+      "pointOfContactAddress2": {
+        "ref$": "product-fields.json#/definitions/pointOfContactAddress2"
+      },
+      "pointOfContactUnitNumber": {
+        "ref$": "product-fields.json#/definitions/pointOfContactUnitNumber"
+      },
+      "pointOfContactCity": {
+        "ref$": "product-fields.json#/definitions/pointOfContactCity"
+      },
+      "pointOfContactStateOrProvince": {
+        "ref$": "product-fields.json#/definitions/pointOfContactStateOrProvince"
+      },
+      "pointOfContactCountry": {
+        "ref$": "product-fields.json#/definitions/pointOfContactCountry"
+      },
+      "pointOfContactZipPostalCode": {
+        "ref$": "product-fields.json#/definitions/pointOfContactZipPostalCode"
+      },
+      "pointOfContactPointOfContactName": {
+        "ref$": "product-fields.json#/definitions/pointOfContactPointOfContactName"
+      },
+      "pointOfContactPointOfContactPhone": {
+        "ref$": "product-fields.json#/definitions/pointOfContactPointOfContactPhone"
+      },
+      "pointOfContactPointOfContactEmail": {
+        "ref$": "product-fields.json#/definitions/pointOfContactPointOfContactEmail"
+      },
+      "packaging": {
+        "type": "array",
+        "minItems": 1,
+        "additionalItems": false
+      }
+    },
+    "$defs": {
+      "packagingItem": {
+        "type": "object",
+        "properties": {
+          "packagingQualifier": {
+            "type": "integer",
+            "title": "Packaging Qualifier",
+            "description": "This code identifies the level of packaging for the product.",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "quantity": {
+            "type": "number",
+            "title": "Quantity",
+            "description": "This code identifies the level of packaging for the product."
+          },
+          "unitOfMeasurePackagingLevel": {
+            "type": "string",
+            "title": "Unit of Measure (Packaging Level)",
+            "description": "Type of packaging / packaging level.",
+            "minLength": 1,
+            "maxLength": 5
+          }
+        },
+        "required": [
+          "packagingQualifier",
+          "quantity",
+          "unitOfMeasurePackagingLevel"
+        ]
+      },
+
+      "packagingContainer": {
+        "allOf": [
+          { "ref$": "#/$defs/packagingItem" },
+          {
+            "type": "object",
+            "properties": {
+              "unitOfMeasurePackagingLevel": {
+                "enum": [
+                  "AE",
+                  "AM",
+                  "AP",
+                  "AT",
+                  "BA",
+                  "BB",
+                  "BC",
+                  "BE",
+                  "BF",
+                  "BG",
+                  "BH",
+                  "BI",
+                  "BJ",
+                  "BK",
+                  "BL",
+                  "BN",
+                  "BO",
+                  "BP",
+                  "BQ",
+                  "BR",
+                  "BS",
+                  "BU",
+                  "BV",
+                  "BX",
+                  "BZ",
+                  "CA",
+                  "CAG",
+                  "CB",
+                  "CC",
+                  "CE",
+                  "CF",
+                  "CH",
+                  "CI",
+                  "CJ",
+                  "CK",
+                  "CL",
+                  "CO",
+                  "CON",
+                  "CP",
+                  "CR",
+                  "CS",
+                  "CT",
+                  "CU",
+                  "CV",
+                  "CX",
+                  "CY",
+                  "CZ",
+                  "DJ",
+                  "DP",
+                  "DR",
+                  "EN",
+                  "FC",
+                  "FD",
+                  "FI",
+                  "FL",
+                  "FO",
+                  "FR",
+                  "GB",
+                  "HG",
+                  "HR",
+                  "JC",
+                  "JG",
+                  "JR",
+                  "JT",
+                  "JY",
+                  "KEG",
+                  "KIT",
+                  "MB",
+                  "MC",
+                  "MS",
+                  "MT",
+                  "NE",
+                  "NS",
+                  "NT",
+                  "PA",
+                  "PAL",
+                  "PC",
+                  "PH",
+                  "PK",
+                  "PL",
+                  "PO",
+                  "PT",
+                  "PU",
+                  "PY",
+                  "RG",
+                  "RO",
+                  "SA",
+                  "SC",
+                  "SD",
+                  "SE",
+                  "SH",
+                  "SK",
+                  "SL",
+                  "SU",
+                  "SW",
+                  "SZ",
+                  "TB",
+                  "TC",
+                  "TD",
+                  "TK",
+                  "TN",
+                  "TO",
+                  "TR",
+                  "TS",
+                  "TU",
+                  "TY",
+                  "TZ",
+                  "VA",
+                  "VG",
+                  "VI",
+                  "VL",
+                  "VO",
+                  "VP",
+                  "VQ",
+                  "VR",
+                  "VY",
+                  "WB"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "packagingBaseUnit": {
+        "allOf": [
+          { "ref$": "#/$defs/packagingItem" },
+          {
+            "type": "object",
+            "properties": {
+              "unitOfMeasurePackagingLevel": {
+                "enum": [
+                  "BBL",
+                  "BOL",
+                  "CAR",
+                  "CAP",
+                  "CFT",
+                  "CG",
+                  "CM3",
+                  "CYD",
+                  "DOZ",
+                  "DPC",
+                  "DPR",
+                  "FOZ",
+                  "G",
+                  "GAL",
+                  "GR",
+                  "KG",
+                  "KM3",
+                  "L",
+                  "LB",
+                  "M3",
+                  "MCG",
+                  "MG",
+                  "ML",
+                  "NO",
+                  "OZ",
+                  "PCS",
+                  "PRS",
+                  "PTL",
+                  "QTL",
+                  "STN",
+                  "T",
+                  "Tab",
+                  "TON",
+                  "TOZ"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    "allOf": [
+      {
+        "properties": {
+          "packaging": {
+            "oneOf": [
+              {
+                "minItems": 1,
+                "items": [
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 1 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingBaseUnit" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "minItems": 2,
+                "items": [
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 1 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 2 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingBaseUnit" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "minItems": 3,
+                "items": [
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 1 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 2 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 3 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingBaseUnit" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "minItems": 4,
+                "items": [
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 1 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 2 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 3 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "packagingQualifier": { "const": 4 }
+                        }
+                      },
+                      { "ref$": "#/$defs/packagingBaseUnit" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "minItems": 5,
+                "items": [
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 1 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 2 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 3 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 4 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 5 } }
+                      },
+                      { "ref$": "#/$defs/packagingBaseUnit" }
+                    ]
+                  }
+                ]
+              },
+              {
+                "minItems": 6,
+                "items": [
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 1 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 2 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 3 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 4 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 5 } }
+                      },
+                      { "ref$": "#/$defs/packagingContainer" }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": { "packagingQualifier": { "const": 6 } }
+                      },
+                      { "ref$": "#/$defs/packagingBaseUnit" }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "required": [
+      "entryType",
+      "referenceQualifier",
+      "dateOfArrival",
+      "timeOfArrival",
+      "billType",
+      "modeOfTransport",
+      "portOfArrival",
+      "htsCode",
+      "governmentAgencyProgramCode",
+      "governmentAgencyProcessingCode",
+      "productCodeNumber",
+      "sourceTypeCode",
+      "countryOfOrigin",
+      "productDescription",
+      "remarks",
+      "pnSubmitterName",
+      "pnSubmitterCity",
+      "pnSubmitterCountry",
+      "pnSubmitterPointOfContactName",
+      "pnSubmitterPointOfContactPhone",
+      "pnSubmitterPointOfContactEmail",
+      "pnTransmitterName",
+      "pnTransmitterCity",
+      "pnTransmitterCountry",
+      "pnTransmitterPointOfContactName",
+      "pnTransmitterPointOfContactPhone",
+      "pnTransmitterPointOfContactEmail",
+      "manufacturerOfGoodsName",
+      "manufacturerOfGoodsCity",
+      "manufacturerOfGoodsCountry",
+      "manufacturerOfGoodsPointOfContactName",
+      "manufacturerOfGoodsPointOfContactPhone",
+      "manufacturerOfGoodsPointOfContactEmail",
+      "shipperName",
+      "shipperCity",
+      "shipperCountry",
+      "shipperPointOfContactName",
+      "shipperPointOfContactPhone",
+      "shipperPointOfContactEmail"
+    ]
+  },
+  "__v": 0
+}
