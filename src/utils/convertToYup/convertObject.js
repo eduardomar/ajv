@@ -8,7 +8,7 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
   // debug('Init');
   return reduceProps(
     jsonSchema,
-    yup.isSchema(yupSchema) ? yupSchema : yup.object(),
+    yup.isSchema(yupSchema) ? yupSchema : yup.object().strict().noUnknown(true),
     (yupAcc, propKey, propValue) => {
       // debug({ propKey, propValue: !!propValue });
       switch (propKey) {

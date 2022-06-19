@@ -17,7 +17,20 @@ module.exports = (jsonSchema, yupSchema) => {
             if (Array.isArray(propValue)) {
               debug('isArray');
             } else {
-              return yupAcc.of(convert(propValue));
+              // debug({ propValue });
+              if (!propValue.type) {
+                let fixProps = { ...propValue };
+                if (fixProps.properties) {
+                  fixProps.type = 'object';
+                } else if (Object.keys(fixProps).length) {
+                  fixProps = {
+                    type: 'object',
+                    properties: fixProps,
+                  };
+                }
+
+                if (fixProps.type.length) return yupAcc.of(convert(fixProps));
+              } else return yupAcc.of(convert(propValue));
             }
           }
           break;

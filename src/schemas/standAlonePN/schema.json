@@ -40,8 +40,8 @@
     },
     "dateOfArrival": {
       "type": "number",
-      "minLength": 8,
-      "maxLength": 8,
+      "minLength": null,
+      "maxLength": null,
       "description": "Date expressed as CCYYMMDD where CC represents the first two digits of the calendar year.",
       "title": "Estimate Date of Arrival",
       "regex": "^((((19|[2-9]\\d)\\d{2})(0[13578]|1[02])(0[1-9]|[12]\\d|3[01]))|(((19|[2-9]\\d)\\d{2})(0[13456789]|1[012])(0[1-9]|[12]\\d|30))|(((19|[2-9]\\d)\\d{2})02(0[1-9]|1\\d|2[0-8]))|(((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|(([1][26]|[2468][048]|[3579][26])00))0229))$",
@@ -58,8 +58,8 @@
     },
     "timeOfArrival": {
       "type": "number",
-      "minLength": 4,
-      "maxLength": 4,
+      "minLength": null,
+      "maxLength": null,
       "description": "Time of Arrival",
       "title": "Time of Arrival",
       "regex": "^([01][0-9]|2[0-3])([0-5][0-9])$",
@@ -148,7 +148,7 @@
       "title": "FDA Source Type Code",
       "description": "FDA Source Type Code",
       "minLength": 2,
-      "maxLength": 2,
+      "maxLength": 3,
       "enum": ["262", "39", "CSH", "294"]
     },
     "countryOfOrigin": {
@@ -176,21 +176,35 @@
     "affirmationOfCompliance": {
       "type": "array",
       "items": {
-        "code": {
-          "type": ["string", "null"],
-          "title": "Affirmation Code 1",
-          "description": "Affirmation Code 1",
-          "minLength": 1,
-          "maxLength": 15,
-          "enum": [null, "IFE", "CPT", "DEV", "DFE", "LST", "DDM", "IDE", "KIT"]
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": ["string", "null"],
+            "title": "Affirmation Code 1",
+            "description": "Affirmation Code 1",
+            "minLength": 1,
+            "maxLength": 15,
+            "enum": [
+              null,
+              "IFE",
+              "CPT",
+              "DEV",
+              "DFE",
+              "LST",
+              "DDM",
+              "IDE",
+              "KIT"
+            ]
+          },
+          "qualifier": {
+            "type": ["string", "null"],
+            "title": "Affirmation Value 1",
+            "description": "Affirmation Value 1",
+            "minLength": 1,
+            "maxLength": 15
+          }
         },
-        "qualifier": {
-          "type": ["string", "null"],
-          "title": "Affirmation Value 1",
-          "description": "Affirmation Value 1",
-          "minLength": 1,
-          "maxLength": 15
-        }
+        "required": ["code", "qualifier"]
       }
     },
     "pnSubmitterFeiOrDunsCode": {
@@ -1051,7 +1065,6 @@
     },
     "packaging": {
       "type": "array",
-      "minItems": 1,
       "additionalItems": false
     }
   },
@@ -1059,6 +1072,7 @@
     {
       "properties": {
         "packaging": {
+          "type": "array",
           "oneOf": [
             {
               "minItems": 1,
@@ -1068,6 +1082,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
@@ -1107,6 +1122,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -1160,6 +1176,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
@@ -1199,6 +1216,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -1330,6 +1348,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
@@ -1369,6 +1388,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -1422,6 +1442,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
@@ -1461,6 +1482,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -1592,6 +1614,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
@@ -1631,6 +1654,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -1762,6 +1786,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 3
                         }
                       }
@@ -1801,6 +1826,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -1854,6 +1880,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
@@ -1893,6 +1920,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2024,6 +2052,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
@@ -2063,6 +2092,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2194,6 +2224,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 3
                         }
                       }
@@ -2233,6 +2264,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2364,6 +2396,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 4
                         }
                       }
@@ -2403,6 +2436,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -2456,6 +2490,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
@@ -2495,6 +2530,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2626,6 +2662,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
@@ -2665,6 +2702,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2796,6 +2834,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 3
                         }
                       }
@@ -2835,6 +2874,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2966,6 +3006,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 4
                         }
                       }
@@ -3005,6 +3046,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3136,6 +3178,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 5
                         }
                       }
@@ -3175,6 +3218,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -3228,6 +3272,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
@@ -3267,6 +3312,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3398,6 +3444,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
@@ -3437,6 +3484,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3568,6 +3616,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 3
                         }
                       }
@@ -3607,6 +3656,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3738,6 +3788,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 4
                         }
                       }
@@ -3777,6 +3828,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3908,6 +3960,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 5
                         }
                       }
@@ -3947,6 +4000,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -4078,6 +4132,7 @@
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 6
                         }
                       }
@@ -4117,6 +4172,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -4206,6 +4262,7 @@
     "shipperCountry",
     "shipperPointOfContactName",
     "shipperPointOfContactPhone",
-    "shipperPointOfContactEmail"
+    "shipperPointOfContactEmail",
+    "packaging"
   ]
 }
