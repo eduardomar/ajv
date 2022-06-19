@@ -10,6 +10,6 @@ module.exports = (jsonSchema) => {
 
   const yupSchema = convert(jsonSchema);
   // debug('describe', yupSchema?.describe?.());
-  debug(keywordsMissing.get());
+  // debug(keywordsMissing.get());
   return yupSchema;
 };

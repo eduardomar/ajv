@@ -18,7 +18,13 @@ module.exports = (jsonSchema, yupSchema) => {
       switch (propKey) {
         case 'enum': {
           const fixValue = Array.isArray(propValue) ? propValue : [propValue];
-          return yupAcc.oneOf(fixValue);
+          return yupAcc.oneOf(
+            fixValue,
+            // eslint-disable-next-line no-template-curly-in-string
+            `${'${path}'} must be one of the following values: ${fixValue
+              .map((value) => `${value}`)
+              .join(', ')}`
+          );
         }
 
         case 'regex':

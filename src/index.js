@@ -3,7 +3,6 @@ const oneOf = require('./schemas/oneOf');
 const anyOf = require('./schemas/anyOf');
 const allOf = require('./schemas/allOf');
 const standAlonePN = require('./schemas/standAlonePN');
-const standAlonePNYup = require('./schemas/standAlonePN/yup');
 
 switch (process?.env?.schema ?? '') {
   case 'oneOf':
@@ -18,17 +17,8 @@ switch (process?.env?.schema ?? '') {
   case 'standAlonePN':
     standAlonePN();
     break;
-  case 'standAlonePNYup':
-    standAlonePNYup();
-    break;
 
   default:
-    debug('Values allowed %o', [
-      'oneOf',
-      'anyOf',
-      'allOf',
-      'standAlonePN',
-      'standAlonePNYup',
-    ]);
+    debug('Values allowed %o', ['oneOf', 'anyOf', 'allOf', 'standAlonePN']);
     break;
 }

@@ -62,8 +62,7 @@ module.exports = (schema, yupSchema, extraValidations = {}) => {
   const jsonSchema = fixSchema(schema);
   const { isNullable, types } = getTypes(jsonSchema);
   if (!types?.length) {
-    keywordsMissing.types.push('unknown');
-    return yup.object({});
+    types.push('mixed');
   }
   let retSchema;
   const type = types?.length === 1 ? types[0] : 'mixed';

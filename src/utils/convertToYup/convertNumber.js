@@ -7,7 +7,12 @@ const convertString = require('./convertString');
 
 module.exports = (jsonSchema, yupSchema) => {
   if (jsonSchema.regex || jsonSchema.regexFrontend) {
-    return convertString(jsonSchema);
+    const schemaString = { ...jsonSchema };
+    delete schemaString.minLength;
+    delete schemaString.maxLength;
+    delete schemaString.length;
+
+    return convertString(schemaString);
   }
 
   // debug('Init');
