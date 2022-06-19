@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const yup = require('yup');
 const debug = require('./debug')('convert');
 const { keywordsMissing } = require('./keywordsMissing');
@@ -5,10 +6,10 @@ const { keywordsMissing } = require('./keywordsMissing');
 const getTypes = (schema) => {
   const normType = schema?.type ?? [];
   const types = Array.isArray(normType) ? normType : [schema?.type];
-  const _enum = Array.isArray(schema?.enum) ? schema.enum : [];
+  const enumAllowed = Array.isArray(schema?.enum) ? schema.enum : [];
 
   return {
-    isNullable: types.includes('null') || _enum.includes(null),
+    isNullable: types.includes('null') || enumAllowed.includes(null),
     types: types
       .filter((type) => type?.length && type !== 'null')
       .map((type) => type.toLocaleLowerCase()),
@@ -19,7 +20,7 @@ const fixSchema = (schema) => {
   const jsonSchema = JSON.parse(JSON.stringify(schema ?? {}));
   if (
     jsonSchema.minLength === jsonSchema.maxLength &&
-    Number.isInteger(parseInt(jsonSchema.minLength))
+    Number.isInteger(parseInt(jsonSchema.minLength, 10))
   ) {
     jsonSchema.length = jsonSchema.minLength;
     delete jsonSchema.minLength;
@@ -46,7 +47,7 @@ const fixSchema = (schema) => {
 
   if (
     jsonSchema.minItems === jsonSchema.maxItems &&
-    Number.isInteger(parseInt(jsonSchema.minItems))
+    Number.isInteger(parseInt(jsonSchema.minItems, 10))
   ) {
     // debug('%d', 4);
     jsonSchema.length = jsonSchema.minItems;
@@ -60,7 +61,10 @@ const fixSchema = (schema) => {
 module.exports = (schema, yupSchema, extraValidations = {}) => {
   const jsonSchema = fixSchema(schema);
   const { isNullable, types } = getTypes(jsonSchema);
-  if (!types?.length) return yup.object({});
+  if (!types?.length) {
+    keywordsMissing.types.push('unknown');
+    return yup.object({});
+  }
   let retSchema;
   const type = types?.length === 1 ? types[0] : 'mixed';
 

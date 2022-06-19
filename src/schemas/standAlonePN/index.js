@@ -20,10 +20,10 @@ module.exports = () => {
   if (!isValid) {
     const errors = (validate?.errors ?? []).map((error) => {
       return Object.fromEntries(
-        Object.entries(error).map(([key, value]) => {
-          if (typeof value === 'string') return [key, value];
+        Object.entries(error).map(([key, errorValue]) => {
+          if (typeof errorValue === 'string') return [key, errorValue];
 
-          return [key, JSON.stringify(value)];
+          return [key, JSON.stringify(errorValue)];
         })
       );
     });

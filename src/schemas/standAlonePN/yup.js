@@ -21,7 +21,7 @@ module.exports = async () => {
     //   'describe ::> %s',
     //   JSON.stringify(schema.describe().fields.affirmationOfCompliance)
     // );
-    const result = await schema.validate(value, { abortEarly: false });
+    await schema.validate(value, { abortEarly: false });
     debug('Valid!!!');
     // debug('%s', JSON.stringify(result));
   } catch (err) {

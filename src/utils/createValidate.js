@@ -4,7 +4,7 @@ const draft6MetaSchema = require('ajv/lib/refs/json-schema-draft-06.json');
 const debug = require('./debug')('createValidate');
 
 module.exports = (...schemas) => {
-  if (!schemas?.length) return;
+  if (!schemas?.length) return undefined;
 
   const [schema, ...rest] = schemas;
   // debug({ schema: !!schema, rest: rest.length });

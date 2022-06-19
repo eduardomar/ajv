@@ -1,4 +1,5 @@
 const debug = require('debug');
+
 const tag = 'playground-ajv';
 
 if (
@@ -11,7 +12,7 @@ if (
 module.exports = (...args) => {
   const namespaces = [tag];
   if (args && args.length) {
-    namespaces.push(...args.filter(str => typeof str === 'string'));
+    namespaces.push(...args.filter((str) => typeof str === 'string'));
   }
 
   return debug(namespaces.join(':'));

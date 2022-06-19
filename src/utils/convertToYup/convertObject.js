@@ -1,5 +1,6 @@
-const debug = require('./debug')('convertObject');
 const yup = require('yup');
+
+const debug = require('./debug')('convertObject');
 const { keywordsMissing } = require('./keywordsMissing');
 const reduceProps = require('./reduceProps');
 const convert = require('./convert'); // ← No se porque aqui
@@ -12,7 +13,7 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
     (yupAcc, propKey, propValue) => {
       // debug({ propKey, propValue: !!propValue });
       switch (propKey) {
-        case 'properties':
+        case 'properties': {
           const yupSchemasFields = Object.entries(propValue ?? {})
             .filter(
               (item) =>
@@ -31,12 +32,13 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
                 ),
               ];
             })
-            .filter(([_, value]) => yup.isSchema(value));
+            .filter(([, value]) => yup.isSchema(value));
 
           if (yupSchemasFields?.length) {
             return yupAcc.shape(Object.fromEntries(yupSchemasFields));
           }
           break;
+        }
 
         default:
           keywordsMissing.object.push(propKey);

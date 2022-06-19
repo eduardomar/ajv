@@ -1,22 +1,25 @@
-const debug = require('./debug')('convertString');
 const yup = require('yup');
+
+const debug = require('./debug')('convertString');
 const { keywordsMissing } = require('./keywordsMissing');
 const reduceProps = require('./reduceProps');
 
 module.exports = (jsonSchema, yupSchema) => {
   // debug('Init');
-  if (jsonSchema.regexFrontend) {
-    delete jsonSchema.regex;
+  const schema = { ...jsonSchema };
+  if (schema.regexFrontend) {
+    delete schema.regex;
   }
 
   return reduceProps(
-    jsonSchema,
+    schema,
     yup.isSchema(yupSchema) ? yupSchema : yup.string(),
     (yupAcc, propKey, propValue) => {
       switch (propKey) {
-        case 'enum':
+        case 'enum': {
           const fixValue = Array.isArray(propValue) ? propValue : [propValue];
           return yupAcc.oneOf(fixValue);
+        }
 
         case 'regex':
         case 'regexFrontend':

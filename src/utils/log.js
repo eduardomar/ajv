@@ -1,5 +1,3 @@
-const showErrors = Boolean(process.env.SHOW_ERRORS === 'true');
-
 const valuesToStr = (values, maxLengthValue) =>
   values
     .sort((a, b) => a - b)
@@ -17,7 +15,7 @@ module.exports = (debug, values, data) => {
   // debug('%o', { maxLengthValue });
   let maxLengthLine = 0;
   data
-    .map(({ _id, valid, invalid, errors }) => {
+    .map(({ _id, valid, invalid }) => {
       const valids = valid.length
         ? ` ${valuesToStr(valid, maxLengthValue)} `
         : '';

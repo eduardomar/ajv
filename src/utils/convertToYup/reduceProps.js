@@ -24,27 +24,33 @@ module.exports = (jsonSchema, yupSchema, cb) => {
       case 'minItems':
       case 'maxItems':
       case 'minimum':
-      case 'maximum':
-        const funcName = ['minLength', 'minItems', 'minimum'].includes(propKey)
-          ? 'min'
-          : ['maxLength', 'maxItems', 'maximum'].includes(propKey)
-          ? 'max'
-          : propKey;
-        const num = parseInt(propValue);
+      case 'maximum': {
+        let funcName = propKey;
+        if (['minLength', 'minItems', 'minimum'].includes(propKey)) {
+          funcName = 'min';
+        } else if (['maxLength', 'maxItems', 'maximum'].includes(propKey)) {
+          funcName = 'max';
+        }
+        const num = parseInt(propValue, 10);
 
         // debug({ key, funcName, num });
         if (Number.isInteger(num) && yupAcc?.[funcName]) {
           return yupAcc[funcName](num);
         }
         break;
+      }
 
-      case 'const':
-        const fixValue = propValue?.length ? propValue : parseInt(propValue);
+      case 'const': {
+        const fixValue = propValue?.length
+          ? propValue
+          : parseInt(propValue, 10);
         if (fixValue?.length || Number.isInteger(fixValue))
           return yupAcc.oneOf([fixValue]);
+        break;
+      }
 
       default:
-        return cb(yupAcc, propKey, propValue);
+        return cb?.(yupAcc, propKey, propValue) ?? yupAcc;
     }
 
     return yupAcc;

@@ -1,5 +1,6 @@
-const debug = require('./debug')('convertArray');
 const yup = require('yup');
+
+const debug = require('./debug')('convertArray');
 const { keywordsMissing } = require('./keywordsMissing');
 const reduceProps = require('./reduceProps');
 const convert = require('./convert');
@@ -12,28 +13,29 @@ module.exports = (jsonSchema, yupSchema) => {
     (yupAcc, propKey, propValue) => {
       // debug('%s %s', propKey, yupAcc.type);
       switch (propKey) {
-        case 'items':
+        case 'items': {
           if (propValue) {
             if (Array.isArray(propValue)) {
               debug('isArray');
             } else {
               // debug({ propValue });
-              if (!propValue.type) {
-                let fixProps = { ...propValue };
-                if (fixProps.properties) {
-                  fixProps.type = 'object';
-                } else if (Object.keys(fixProps).length) {
-                  fixProps = {
-                    type: 'object',
-                    properties: fixProps,
-                  };
-                }
+              if (propValue.type) return yupAcc.of(convert(propValue));
 
-                if (fixProps.type.length) return yupAcc.of(convert(fixProps));
-              } else return yupAcc.of(convert(propValue));
+              let fixProps = { ...propValue };
+              if (fixProps.properties) {
+                fixProps.type = 'object';
+              } else if (Object.keys(fixProps).length) {
+                fixProps = {
+                  type: 'object',
+                  properties: fixProps,
+                };
+              }
+
+              if (fixProps.type.length) return yupAcc.of(convert(fixProps));
             }
           }
           break;
+        }
 
         default:
           keywordsMissing.array.push(propKey);
