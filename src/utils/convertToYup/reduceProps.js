@@ -30,14 +30,23 @@ module.exports = (jsonSchema, yupSchema, cb) => {
       // Fields to ignore
       case '$id':
       case '$ref':
-      case 'type':
+      case '$schema':
+      case 'additionalItems':
       case 'description':
       case 'descriptionFrontend':
+      case 'fieldAddZero':
+      case 'fieldConvertStateName':
+      case 'fieldFormatter':
       case 'fieldNoDashesAndDots':
-      case 'fieldTrim':
+      case 'fieldNoSpaces':
       case 'fieldRound':
+      case 'fieldStartZero':
+      case 'fieldSubstring':
+      case 'fieldTrim':
+      case 'fieldTrimStartEnd':
+      case 'fieldUpperCase':
       case 'title':
-      case 'additionalItems':
+      case 'type':
         keywordsMissing.ignored.push(propKey);
         break;
 

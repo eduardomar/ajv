@@ -25,7 +25,7 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
             )
             .map(([key, value]) => {
               const oldSchema = yupAcc?.fields?.[key]?.clone() ?? null;
-              // debug({ key, value });
+              // debug({ key, value, fields: Object.keys(yupAcc?.fields) });
               return [
                 key,
                 convert(
@@ -46,7 +46,7 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
         case 'allOf': {
           const allOf = Array.isArray(propValue) ? propValue : [propValue];
           return allOf.reduce((yupAccAllOf, jsonSchemaAllOf, index) => {
-            const schema = fixJsonSchemaProps(jsonSchemaAllOf);
+            const schema = fixJsonSchemaProps(jsonSchemaAllOf, yupAcc);
             const yupSchemaAllOf = convert(schema)?.noUnknown(false);
             return yupAccAllOf
               .shape(
