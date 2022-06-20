@@ -4,6 +4,7 @@ const keywordsMissing = {
   string: [],
   number: [],
   array: [],
+  mixed: [],
   ignored: [],
 };
 

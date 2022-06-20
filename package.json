@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config src/index.js --exec \"npm run lint:fix && node\"",
+    "dev": "nodemon -r dotenv/config src/index.js",
+    "dev:lint": "nodemon -r dotenv/config src/index.js --exec \"npm run lint && node\"",
     "lint": "eslint \"./src/**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint \"./src/**/*.{js,ts,tsx}\" --fix",
     "format": "prettier --write \"./**/*.{js,jsx,json,css}\""

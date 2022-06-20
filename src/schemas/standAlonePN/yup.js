@@ -6,17 +6,17 @@ module.exports = async (value) => {
   debug('Init');
   const schema = convertToYup(schemaObj);
   try {
+    // debug(schema.describe());
     const result = await schema.validate(value, { abortEarly: false });
     debug('Valid!!!');
-    result.dateOfArrival = Number(result.dateOfArrival.replace(/\//gi, ''));
-    result.timeOfArrival = Number(result.timeOfArrival.replace(/:/gi, ''));
-    // debug({
-    //   dateOfArrival: result.dateOfArrival,
-    //   timeOfArrival: result.timeOfArrival,
-    // });
+    if (result?.dateOfArrival)
+      result.dateOfArrival = Number(result.dateOfArrival.replace(/\//gi, ''));
+    if (result?.timeOfArrival)
+      result.timeOfArrival = Number(result.timeOfArrival.replace(/:/gi, ''));
 
     return result;
   } catch (err) {
+    // debug(err);
     debug({ name: err.name, errors: err.errors });
   }
 

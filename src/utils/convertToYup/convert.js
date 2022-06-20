@@ -89,6 +89,10 @@ module.exports = (schema, yupSchema, extraValidations = {}) => {
       }
       break;
 
+    case 'mixed':
+      retSchema = require('./convertMixed')(jsonSchema, yupSchema);
+      break;
+
     default:
       retSchema = yup.mixed();
       keywordsMissing.types.push(type);

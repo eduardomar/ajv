@@ -1,13 +1,35 @@
 const { keywordsMissing } = require('./keywordsMissing');
+const debug = require('./debug')('reduceProps');
+
+const lastItems = ['allOf', 'oneOf', 'anyOf', 'items'];
 
 module.exports = (jsonSchema, yupSchema, cb) => {
-  const entries = Object.entries(jsonSchema ?? {});
+  const entries = Object.entries(jsonSchema ?? {}).sort(([a], [b]) => {
+    const result = lastItems.reduce((acc, field) => {
+      if (acc === 0) {
+        if (a === field) return 1;
+        if (b === field) return -1;
+      }
+
+      return acc;
+    }, 0);
+    if (result !== 0) return result;
+
+    if (a < b) return -1;
+    if (a > b) return 1;
+
+    return 0;
+  });
+
   // yupSchema.meta(jsonSchema);
   return entries.reduce((yupAcc, [propKey, propValue]) => {
+    // if (index === entries.length - 1) debug('Last ::> %s', propKey);
     // return cb(yupAcc, propKey, propValue);
+
     switch (propKey) {
       // Fields to ignore
       case '$id':
+      case '$ref':
       case 'type':
       case 'description':
       case 'descriptionFrontend':

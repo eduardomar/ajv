@@ -8,8 +8,7 @@ module.exports = async () => {
 
   const result = await yup(value);
   if (result) {
-    // debug({ result });
-
-    jsonSchema(result);
+    // debug({ packaging: result.packaging });
+    jsonSchema(value);
   }
 };

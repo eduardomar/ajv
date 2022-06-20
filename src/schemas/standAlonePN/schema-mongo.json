@@ -122,6 +122,7 @@
       "sourceTypeCode": {
         "ref$": "product-fields.json#/definitions/fdaSourceTypeCode",
         "type": "string",
+        "maxLength": 3,
         "enum": ["262", "39", "CSH", "294"]
       },
       "countryOfOrigin": {
@@ -450,9 +451,7 @@
       "ownerFeiOrDuns": {
         "ref$": "product-fields.json#/definitions/ownerFeiOrDuns"
       },
-      "ownerName": {
-        "ref$": "product-fields.json#/definitions/ownerName"
-      },
+      "ownerName": { "ref$": "product-fields.json#/definitions/ownerName" },
       "ownerAddress": {
         "ref$": "product-fields.json#/definitions/ownerAddress"
       },
@@ -462,9 +461,7 @@
       "ownerUnitNumber": {
         "ref$": "product-fields.json#/definitions/ownerUnitNumber"
       },
-      "ownerCity": {
-        "ref$": "product-fields.json#/definitions/ownerCity"
-      },
+      "ownerCity": { "ref$": "product-fields.json#/definitions/ownerCity" },
       "ownerStateOrProvince": {
         "ref$": "product-fields.json#/definitions/ownerStateOrProvince"
       },
@@ -522,11 +519,7 @@
       "pointOfContactPointOfContactEmail": {
         "ref$": "product-fields.json#/definitions/pointOfContactPointOfContactEmail"
       },
-      "packaging": {
-        "type": "array",
-        "minItems": 1,
-        "additionalItems": false
-      }
+      "packaging": { "type": "array", "minItems": 1, "additionalItems": false }
     },
     "$defs": {
       "packagingItem": {
@@ -558,7 +551,6 @@
           "unitOfMeasurePackagingLevel"
         ]
       },
-
       "packagingContainer": {
         "allOf": [
           { "ref$": "#/$defs/packagingItem" },
@@ -566,6 +558,7 @@
             "type": "object",
             "properties": {
               "unitOfMeasurePackagingLevel": {
+                "type": "string",
                 "enum": [
                   "AE",
                   "AM",
@@ -697,6 +690,7 @@
             "type": "object",
             "properties": {
               "unitOfMeasurePackagingLevel": {
+                "type": "string",
                 "enum": [
                   "BBL",
                   "BOL",
@@ -746,218 +740,309 @@
             "oneOf": [
               {
                 "minItems": 1,
+                "additionalItems": false,
                 "items": [
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingBaseUnit" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 1 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 1
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingBaseUnit" }
+                      }
                     ]
                   }
                 ]
               },
               {
                 "minItems": 2,
+                "additionalItems": false,
                 "items": [
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 1 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 1
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingBaseUnit" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 2 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 2
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingBaseUnit" }
+                      }
                     ]
                   }
                 ]
               },
               {
                 "minItems": 3,
+                "additionalItems": false,
                 "items": [
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 1 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 1
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 2 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 2
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingBaseUnit" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 3 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 3
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingBaseUnit" }
+                      }
                     ]
                   }
                 ]
               },
               {
                 "minItems": 4,
+                "additionalItems": false,
                 "items": [
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 1 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 1
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 2 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 2
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 3 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 3
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingBaseUnit" },
                       {
                         "properties": {
-                          "packagingQualifier": { "const": 4 }
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 4
+                          }
                         }
-                      },
-                      { "ref$": "#/$defs/packagingBaseUnit" }
+                      }
                     ]
                   }
                 ]
               },
               {
                 "minItems": 5,
+                "additionalItems": false,
                 "items": [
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 1 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 1
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 2 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 2
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 3 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 3
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 4 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 4
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingBaseUnit" },
                       {
-                        "properties": { "packagingQualifier": { "const": 5 } }
-                      },
-                      { "ref$": "#/$defs/packagingBaseUnit" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 5
+                          }
+                        }
+                      }
                     ]
                   }
                 ]
               },
               {
                 "minItems": 6,
+                "additionalItems": false,
                 "items": [
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 1 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 1
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 2 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 2
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 3 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 3
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 4 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 4
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingContainer" },
                       {
-                        "properties": { "packagingQualifier": { "const": 5 } }
-                      },
-                      { "ref$": "#/$defs/packagingContainer" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 5
+                          }
+                        }
+                      }
                     ]
                   },
                   {
                     "allOf": [
+                      { "ref$": "#/$defs/packagingBaseUnit" },
                       {
-                        "properties": { "packagingQualifier": { "const": 6 } }
-                      },
-                      { "ref$": "#/$defs/packagingBaseUnit" }
+                        "properties": {
+                          "packagingQualifier": {
+                            "type": "integer",
+                            "const": 6
+                          }
+                        }
+                      }
                     ]
                   }
                 ]

@@ -102,7 +102,8 @@
       "minLength": 4,
       "maxLength": 4,
       "description": "Port of Arrival of the vessel in the U.S. ",
-      "title": "US Port of Arrival"
+      "title": "US Port of Arrival",
+      "$ref": "USPortOfArrival.json#/definitions/USPortOfArrival"
     },
     "htsCode": {
       "type": "string",
@@ -1062,16 +1063,10 @@
           "oneOf": [
             {
               "minItems": 1,
+              "additionalItems": false,
               "items": [
                 {
                   "allOf": [
-                    {
-                      "properties": {
-                        "packagingQualifier": {
-                          "const": 1
-                        }
-                      }
-                    },
                     {
                       "allOf": [
                         {
@@ -1107,6 +1102,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -1147,6 +1143,14 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "type": "integer",
+                          "const": 1
+                        }
+                      }
                     }
                   ]
                 }
@@ -1154,16 +1158,10 @@
             },
             {
               "minItems": 2,
+              "additionalItems": false,
               "items": [
                 {
                   "allOf": [
-                    {
-                      "properties": {
-                        "packagingQualifier": {
-                          "const": 1
-                        }
-                      }
-                    },
                     {
                       "allOf": [
                         {
@@ -1199,6 +1197,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -1322,18 +1321,19 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "type": "integer",
+                          "const": 1
+                        }
+                      }
                     }
                   ]
                 },
                 {
                   "allOf": [
-                    {
-                      "properties": {
-                        "packagingQualifier": {
-                          "const": 2
-                        }
-                      }
-                    },
                     {
                       "allOf": [
                         {
@@ -1369,6 +1369,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -1409,6 +1410,14 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "type": "integer",
+                          "const": 2
+                        }
+                      }
                     }
                   ]
                 }
@@ -1416,16 +1425,182 @@
             },
             {
               "minItems": 3,
+              "additionalItems": false,
               "items": [
                 {
                   "allOf": [
                     {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -1461,6 +1636,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -1584,189 +1760,20 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
-                    },
-                    {
-                      "allOf": [
-                        {
-                          "type": "object",
-                          "properties": {
-                            "packagingQualifier": {
-                              "type": "integer",
-                              "title": "Packaging Qualifier",
-                              "description": "This code identifies the level of packaging for the product.",
-                              "minimum": 1,
-                              "maximum": 6
-                            },
-                            "quantity": {
-                              "type": "number",
-                              "title": "Quantity",
-                              "description": "This code identifies the level of packaging for the product."
-                            },
-                            "unitOfMeasurePackagingLevel": {
-                              "type": "string",
-                              "title": "Unit of Measure (Packaging Level)",
-                              "description": "Type of packaging / packaging level.",
-                              "minLength": 1,
-                              "maxLength": 5
-                            }
-                          },
-                          "required": [
-                            "packagingQualifier",
-                            "quantity",
-                            "unitOfMeasurePackagingLevel"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "unitOfMeasurePackagingLevel": {
-                              "enum": [
-                                "AE",
-                                "AM",
-                                "AP",
-                                "AT",
-                                "BA",
-                                "BB",
-                                "BC",
-                                "BE",
-                                "BF",
-                                "BG",
-                                "BH",
-                                "BI",
-                                "BJ",
-                                "BK",
-                                "BL",
-                                "BN",
-                                "BO",
-                                "BP",
-                                "BQ",
-                                "BR",
-                                "BS",
-                                "BU",
-                                "BV",
-                                "BX",
-                                "BZ",
-                                "CA",
-                                "CAG",
-                                "CB",
-                                "CC",
-                                "CE",
-                                "CF",
-                                "CH",
-                                "CI",
-                                "CJ",
-                                "CK",
-                                "CL",
-                                "CO",
-                                "CON",
-                                "CP",
-                                "CR",
-                                "CS",
-                                "CT",
-                                "CU",
-                                "CV",
-                                "CX",
-                                "CY",
-                                "CZ",
-                                "DJ",
-                                "DP",
-                                "DR",
-                                "EN",
-                                "FC",
-                                "FD",
-                                "FI",
-                                "FL",
-                                "FO",
-                                "FR",
-                                "GB",
-                                "HG",
-                                "HR",
-                                "JC",
-                                "JG",
-                                "JR",
-                                "JT",
-                                "JY",
-                                "KEG",
-                                "KIT",
-                                "MB",
-                                "MC",
-                                "MS",
-                                "MT",
-                                "NE",
-                                "NS",
-                                "NT",
-                                "PA",
-                                "PAL",
-                                "PC",
-                                "PH",
-                                "PK",
-                                "PL",
-                                "PO",
-                                "PT",
-                                "PU",
-                                "PY",
-                                "RG",
-                                "RO",
-                                "SA",
-                                "SC",
-                                "SD",
-                                "SE",
-                                "SH",
-                                "SK",
-                                "SL",
-                                "SU",
-                                "SW",
-                                "SZ",
-                                "TB",
-                                "TC",
-                                "TD",
-                                "TK",
-                                "TN",
-                                "TO",
-                                "TR",
-                                "TS",
-                                "TU",
-                                "TY",
-                                "TZ",
-                                "VA",
-                                "VG",
-                                "VI",
-                                "VL",
-                                "VO",
-                                "VP",
-                                "VQ",
-                                "VR",
-                                "VY",
-                                "WB"
-                              ]
-                            }
-                          }
-                        }
-                      ]
                     }
                   ]
                 },
                 {
                   "allOf": [
                     {
-                      "properties": {
-                        "packagingQualifier": {
-                          "const": 3
-                        }
-                      }
-                    },
-                    {
                       "allOf": [
                         {
                           "type": "object",
@@ -1801,6 +1808,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -1841,6 +1849,14 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "type": "integer",
+                          "const": 3
+                        }
+                      }
                     }
                   ]
                 }
@@ -1848,16 +1864,182 @@
             },
             {
               "minItems": 4,
+              "additionalItems": false,
               "items": [
                 {
                   "allOf": [
                     {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -1893,6 +2075,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2016,18 +2199,19 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -2063,6 +2247,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2186,189 +2371,20 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 3
                         }
                       }
-                    },
-                    {
-                      "allOf": [
-                        {
-                          "type": "object",
-                          "properties": {
-                            "packagingQualifier": {
-                              "type": "integer",
-                              "title": "Packaging Qualifier",
-                              "description": "This code identifies the level of packaging for the product.",
-                              "minimum": 1,
-                              "maximum": 6
-                            },
-                            "quantity": {
-                              "type": "number",
-                              "title": "Quantity",
-                              "description": "This code identifies the level of packaging for the product."
-                            },
-                            "unitOfMeasurePackagingLevel": {
-                              "type": "string",
-                              "title": "Unit of Measure (Packaging Level)",
-                              "description": "Type of packaging / packaging level.",
-                              "minLength": 1,
-                              "maxLength": 5
-                            }
-                          },
-                          "required": [
-                            "packagingQualifier",
-                            "quantity",
-                            "unitOfMeasurePackagingLevel"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "unitOfMeasurePackagingLevel": {
-                              "enum": [
-                                "AE",
-                                "AM",
-                                "AP",
-                                "AT",
-                                "BA",
-                                "BB",
-                                "BC",
-                                "BE",
-                                "BF",
-                                "BG",
-                                "BH",
-                                "BI",
-                                "BJ",
-                                "BK",
-                                "BL",
-                                "BN",
-                                "BO",
-                                "BP",
-                                "BQ",
-                                "BR",
-                                "BS",
-                                "BU",
-                                "BV",
-                                "BX",
-                                "BZ",
-                                "CA",
-                                "CAG",
-                                "CB",
-                                "CC",
-                                "CE",
-                                "CF",
-                                "CH",
-                                "CI",
-                                "CJ",
-                                "CK",
-                                "CL",
-                                "CO",
-                                "CON",
-                                "CP",
-                                "CR",
-                                "CS",
-                                "CT",
-                                "CU",
-                                "CV",
-                                "CX",
-                                "CY",
-                                "CZ",
-                                "DJ",
-                                "DP",
-                                "DR",
-                                "EN",
-                                "FC",
-                                "FD",
-                                "FI",
-                                "FL",
-                                "FO",
-                                "FR",
-                                "GB",
-                                "HG",
-                                "HR",
-                                "JC",
-                                "JG",
-                                "JR",
-                                "JT",
-                                "JY",
-                                "KEG",
-                                "KIT",
-                                "MB",
-                                "MC",
-                                "MS",
-                                "MT",
-                                "NE",
-                                "NS",
-                                "NT",
-                                "PA",
-                                "PAL",
-                                "PC",
-                                "PH",
-                                "PK",
-                                "PL",
-                                "PO",
-                                "PT",
-                                "PU",
-                                "PY",
-                                "RG",
-                                "RO",
-                                "SA",
-                                "SC",
-                                "SD",
-                                "SE",
-                                "SH",
-                                "SK",
-                                "SL",
-                                "SU",
-                                "SW",
-                                "SZ",
-                                "TB",
-                                "TC",
-                                "TD",
-                                "TK",
-                                "TN",
-                                "TO",
-                                "TR",
-                                "TS",
-                                "TU",
-                                "TY",
-                                "TZ",
-                                "VA",
-                                "VG",
-                                "VI",
-                                "VL",
-                                "VO",
-                                "VP",
-                                "VQ",
-                                "VR",
-                                "VY",
-                                "WB"
-                              ]
-                            }
-                          }
-                        }
-                      ]
                     }
                   ]
                 },
                 {
                   "allOf": [
                     {
-                      "properties": {
-                        "packagingQualifier": {
-                          "const": 4
-                        }
-                      }
-                    },
-                    {
                       "allOf": [
                         {
                           "type": "object",
@@ -2403,6 +2419,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -2443,6 +2460,14 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "type": "integer",
+                          "const": 4
+                        }
+                      }
                     }
                   ]
                 }
@@ -2450,16 +2475,182 @@
             },
             {
               "minItems": 5,
+              "additionalItems": false,
               "items": [
                 {
                   "allOf": [
                     {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -2495,6 +2686,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2618,18 +2810,19 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -2665,6 +2858,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2788,18 +2982,19 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 3
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -2835,6 +3030,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -2958,189 +3154,20 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 4
                         }
                       }
-                    },
-                    {
-                      "allOf": [
-                        {
-                          "type": "object",
-                          "properties": {
-                            "packagingQualifier": {
-                              "type": "integer",
-                              "title": "Packaging Qualifier",
-                              "description": "This code identifies the level of packaging for the product.",
-                              "minimum": 1,
-                              "maximum": 6
-                            },
-                            "quantity": {
-                              "type": "number",
-                              "title": "Quantity",
-                              "description": "This code identifies the level of packaging for the product."
-                            },
-                            "unitOfMeasurePackagingLevel": {
-                              "type": "string",
-                              "title": "Unit of Measure (Packaging Level)",
-                              "description": "Type of packaging / packaging level.",
-                              "minLength": 1,
-                              "maxLength": 5
-                            }
-                          },
-                          "required": [
-                            "packagingQualifier",
-                            "quantity",
-                            "unitOfMeasurePackagingLevel"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "unitOfMeasurePackagingLevel": {
-                              "enum": [
-                                "AE",
-                                "AM",
-                                "AP",
-                                "AT",
-                                "BA",
-                                "BB",
-                                "BC",
-                                "BE",
-                                "BF",
-                                "BG",
-                                "BH",
-                                "BI",
-                                "BJ",
-                                "BK",
-                                "BL",
-                                "BN",
-                                "BO",
-                                "BP",
-                                "BQ",
-                                "BR",
-                                "BS",
-                                "BU",
-                                "BV",
-                                "BX",
-                                "BZ",
-                                "CA",
-                                "CAG",
-                                "CB",
-                                "CC",
-                                "CE",
-                                "CF",
-                                "CH",
-                                "CI",
-                                "CJ",
-                                "CK",
-                                "CL",
-                                "CO",
-                                "CON",
-                                "CP",
-                                "CR",
-                                "CS",
-                                "CT",
-                                "CU",
-                                "CV",
-                                "CX",
-                                "CY",
-                                "CZ",
-                                "DJ",
-                                "DP",
-                                "DR",
-                                "EN",
-                                "FC",
-                                "FD",
-                                "FI",
-                                "FL",
-                                "FO",
-                                "FR",
-                                "GB",
-                                "HG",
-                                "HR",
-                                "JC",
-                                "JG",
-                                "JR",
-                                "JT",
-                                "JY",
-                                "KEG",
-                                "KIT",
-                                "MB",
-                                "MC",
-                                "MS",
-                                "MT",
-                                "NE",
-                                "NS",
-                                "NT",
-                                "PA",
-                                "PAL",
-                                "PC",
-                                "PH",
-                                "PK",
-                                "PL",
-                                "PO",
-                                "PT",
-                                "PU",
-                                "PY",
-                                "RG",
-                                "RO",
-                                "SA",
-                                "SC",
-                                "SD",
-                                "SE",
-                                "SH",
-                                "SK",
-                                "SL",
-                                "SU",
-                                "SW",
-                                "SZ",
-                                "TB",
-                                "TC",
-                                "TD",
-                                "TK",
-                                "TN",
-                                "TO",
-                                "TR",
-                                "TS",
-                                "TU",
-                                "TY",
-                                "TZ",
-                                "VA",
-                                "VG",
-                                "VI",
-                                "VL",
-                                "VO",
-                                "VP",
-                                "VQ",
-                                "VR",
-                                "VY",
-                                "WB"
-                              ]
-                            }
-                          }
-                        }
-                      ]
                     }
                   ]
                 },
                 {
                   "allOf": [
                     {
-                      "properties": {
-                        "packagingQualifier": {
-                          "const": 5
-                        }
-                      }
-                    },
-                    {
                       "allOf": [
                         {
                           "type": "object",
@@ -3175,6 +3202,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -3215,6 +3243,14 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "type": "integer",
+                          "const": 5
+                        }
+                      }
                     }
                   ]
                 }
@@ -3222,16 +3258,182 @@
             },
             {
               "minItems": 6,
+              "additionalItems": false,
               "items": [
                 {
                   "allOf": [
                     {
+                      "allOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "packagingQualifier": {
+                              "type": "integer",
+                              "title": "Packaging Qualifier",
+                              "description": "This code identifies the level of packaging for the product.",
+                              "minimum": 1,
+                              "maximum": 6
+                            },
+                            "quantity": {
+                              "type": "number",
+                              "title": "Quantity",
+                              "description": "This code identifies the level of packaging for the product."
+                            },
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "title": "Unit of Measure (Packaging Level)",
+                              "description": "Type of packaging / packaging level.",
+                              "minLength": 1,
+                              "maxLength": 5
+                            }
+                          },
+                          "required": [
+                            "packagingQualifier",
+                            "quantity",
+                            "unitOfMeasurePackagingLevel"
+                          ]
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "unitOfMeasurePackagingLevel": {
+                              "type": "string",
+                              "enum": [
+                                "AE",
+                                "AM",
+                                "AP",
+                                "AT",
+                                "BA",
+                                "BB",
+                                "BC",
+                                "BE",
+                                "BF",
+                                "BG",
+                                "BH",
+                                "BI",
+                                "BJ",
+                                "BK",
+                                "BL",
+                                "BN",
+                                "BO",
+                                "BP",
+                                "BQ",
+                                "BR",
+                                "BS",
+                                "BU",
+                                "BV",
+                                "BX",
+                                "BZ",
+                                "CA",
+                                "CAG",
+                                "CB",
+                                "CC",
+                                "CE",
+                                "CF",
+                                "CH",
+                                "CI",
+                                "CJ",
+                                "CK",
+                                "CL",
+                                "CO",
+                                "CON",
+                                "CP",
+                                "CR",
+                                "CS",
+                                "CT",
+                                "CU",
+                                "CV",
+                                "CX",
+                                "CY",
+                                "CZ",
+                                "DJ",
+                                "DP",
+                                "DR",
+                                "EN",
+                                "FC",
+                                "FD",
+                                "FI",
+                                "FL",
+                                "FO",
+                                "FR",
+                                "GB",
+                                "HG",
+                                "HR",
+                                "JC",
+                                "JG",
+                                "JR",
+                                "JT",
+                                "JY",
+                                "KEG",
+                                "KIT",
+                                "MB",
+                                "MC",
+                                "MS",
+                                "MT",
+                                "NE",
+                                "NS",
+                                "NT",
+                                "PA",
+                                "PAL",
+                                "PC",
+                                "PH",
+                                "PK",
+                                "PL",
+                                "PO",
+                                "PT",
+                                "PU",
+                                "PY",
+                                "RG",
+                                "RO",
+                                "SA",
+                                "SC",
+                                "SD",
+                                "SE",
+                                "SH",
+                                "SK",
+                                "SL",
+                                "SU",
+                                "SW",
+                                "SZ",
+                                "TB",
+                                "TC",
+                                "TD",
+                                "TK",
+                                "TN",
+                                "TO",
+                                "TR",
+                                "TS",
+                                "TU",
+                                "TY",
+                                "TZ",
+                                "VA",
+                                "VG",
+                                "VI",
+                                "VL",
+                                "VO",
+                                "VP",
+                                "VQ",
+                                "VR",
+                                "VY",
+                                "WB"
+                              ]
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 1
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -3267,6 +3469,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3390,18 +3593,19 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 2
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -3437,6 +3641,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3560,18 +3765,19 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 3
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -3607,6 +3813,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3730,18 +3937,19 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 4
                         }
                       }
-                    },
+                    }
+                  ]
+                },
+                {
+                  "allOf": [
                     {
                       "allOf": [
                         {
@@ -3777,6 +3985,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "AE",
                                 "AM",
@@ -3900,189 +4109,20 @@
                           }
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "allOf": [
+                    },
                     {
                       "properties": {
                         "packagingQualifier": {
+                          "type": "integer",
                           "const": 5
                         }
                       }
-                    },
-                    {
-                      "allOf": [
-                        {
-                          "type": "object",
-                          "properties": {
-                            "packagingQualifier": {
-                              "type": "integer",
-                              "title": "Packaging Qualifier",
-                              "description": "This code identifies the level of packaging for the product.",
-                              "minimum": 1,
-                              "maximum": 6
-                            },
-                            "quantity": {
-                              "type": "number",
-                              "title": "Quantity",
-                              "description": "This code identifies the level of packaging for the product."
-                            },
-                            "unitOfMeasurePackagingLevel": {
-                              "type": "string",
-                              "title": "Unit of Measure (Packaging Level)",
-                              "description": "Type of packaging / packaging level.",
-                              "minLength": 1,
-                              "maxLength": 5
-                            }
-                          },
-                          "required": [
-                            "packagingQualifier",
-                            "quantity",
-                            "unitOfMeasurePackagingLevel"
-                          ]
-                        },
-                        {
-                          "type": "object",
-                          "properties": {
-                            "unitOfMeasurePackagingLevel": {
-                              "enum": [
-                                "AE",
-                                "AM",
-                                "AP",
-                                "AT",
-                                "BA",
-                                "BB",
-                                "BC",
-                                "BE",
-                                "BF",
-                                "BG",
-                                "BH",
-                                "BI",
-                                "BJ",
-                                "BK",
-                                "BL",
-                                "BN",
-                                "BO",
-                                "BP",
-                                "BQ",
-                                "BR",
-                                "BS",
-                                "BU",
-                                "BV",
-                                "BX",
-                                "BZ",
-                                "CA",
-                                "CAG",
-                                "CB",
-                                "CC",
-                                "CE",
-                                "CF",
-                                "CH",
-                                "CI",
-                                "CJ",
-                                "CK",
-                                "CL",
-                                "CO",
-                                "CON",
-                                "CP",
-                                "CR",
-                                "CS",
-                                "CT",
-                                "CU",
-                                "CV",
-                                "CX",
-                                "CY",
-                                "CZ",
-                                "DJ",
-                                "DP",
-                                "DR",
-                                "EN",
-                                "FC",
-                                "FD",
-                                "FI",
-                                "FL",
-                                "FO",
-                                "FR",
-                                "GB",
-                                "HG",
-                                "HR",
-                                "JC",
-                                "JG",
-                                "JR",
-                                "JT",
-                                "JY",
-                                "KEG",
-                                "KIT",
-                                "MB",
-                                "MC",
-                                "MS",
-                                "MT",
-                                "NE",
-                                "NS",
-                                "NT",
-                                "PA",
-                                "PAL",
-                                "PC",
-                                "PH",
-                                "PK",
-                                "PL",
-                                "PO",
-                                "PT",
-                                "PU",
-                                "PY",
-                                "RG",
-                                "RO",
-                                "SA",
-                                "SC",
-                                "SD",
-                                "SE",
-                                "SH",
-                                "SK",
-                                "SL",
-                                "SU",
-                                "SW",
-                                "SZ",
-                                "TB",
-                                "TC",
-                                "TD",
-                                "TK",
-                                "TN",
-                                "TO",
-                                "TR",
-                                "TS",
-                                "TU",
-                                "TY",
-                                "TZ",
-                                "VA",
-                                "VG",
-                                "VI",
-                                "VL",
-                                "VO",
-                                "VP",
-                                "VQ",
-                                "VR",
-                                "VY",
-                                "WB"
-                              ]
-                            }
-                          }
-                        }
-                      ]
                     }
                   ]
                 },
                 {
                   "allOf": [
                     {
-                      "properties": {
-                        "packagingQualifier": {
-                          "const": 6
-                        }
-                      }
-                    },
-                    {
                       "allOf": [
                         {
                           "type": "object",
@@ -4117,6 +4157,7 @@
                           "type": "object",
                           "properties": {
                             "unitOfMeasurePackagingLevel": {
+                              "type": "string",
                               "enum": [
                                 "BBL",
                                 "BOL",
@@ -4157,6 +4198,14 @@
                           }
                         }
                       ]
+                    },
+                    {
+                      "properties": {
+                        "packagingQualifier": {
+                          "type": "integer",
+                          "const": 6
+                        }
+                      }
                     }
                   ]
                 }

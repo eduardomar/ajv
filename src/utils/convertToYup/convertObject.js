@@ -3,7 +3,8 @@ const yup = require('yup');
 const debug = require('./debug')('convertObject');
 const { keywordsMissing } = require('./keywordsMissing');
 const reduceProps = require('./reduceProps');
-const convert = require('./convert'); // ← No se porque aqui
+const convert = require('./convert');
+const fixJsonSchemaProps = require('./fixJsonSchemaProps');
 
 module.exports = ({ required, ...jsonSchema }, yupSchema) => {
   // debug('Init');
@@ -23,11 +24,13 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
                 Object.keys(item[1] ?? {}).length
             )
             .map(([key, value]) => {
+              const oldSchema = yupAcc?.fields?.[key]?.clone() ?? null;
+              // debug({ key, value });
               return [
                 key,
                 convert(
-                  value,
-                  null,
+                  { type: oldSchema?.type ?? value.type, ...value },
+                  oldSchema,
                   required?.includes?.(key) ? { required: null } : {}
                 ),
               ];
@@ -38,6 +41,49 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
             return yupAcc.shape(Object.fromEntries(yupSchemasFields));
           }
           break;
+        }
+        case 'allOf': {
+          const allOf = Array.isArray(propValue) ? propValue : [propValue];
+          return allOf.reduce((yupAccAllOf, jsonSchemaAllOf, index) => {
+            const schema = fixJsonSchemaProps(jsonSchemaAllOf);
+            // debug({ jsonSchemaAllOf, schema });
+
+            if (schema?.properties) {
+              schema.properties = Object.fromEntries(
+                Object.entries(schema.properties).map(
+                  ([key, { type, ...props }]) => [
+                    key,
+                    {
+                      type: yupAcc?.fields?.[key]?.type ?? type,
+                      ...props,
+                    },
+                  ]
+                )
+              );
+            }
+
+            const yupSchemaAllOf = convert(schema)?.noUnknown(false);
+            return yupAccAllOf
+              .shape(
+                Object.fromEntries(
+                  Object.entries(yupSchemaAllOf.fields).map(
+                    ([key, schemaField]) => {
+                      return [key, yup?.[schemaField.type]?.()];
+                    }
+                  )
+                )
+              )
+              .test(
+                `all-of-${index}`,
+                'object lalo',
+                async (value, { path }) => {
+                  // debug.extend(index)(yupSchemaAllOf.describe());
+                  return yup
+                    .object({ [path]: yupSchemaAllOf.clone() })
+                    .validate({ [path]: value }, { abortEarly: false });
+                }
+              );
+          }, yupAcc);
         }
 
         default:
