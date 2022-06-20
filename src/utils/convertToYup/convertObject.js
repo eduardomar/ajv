@@ -42,26 +42,11 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
           }
           break;
         }
+
         case 'allOf': {
           const allOf = Array.isArray(propValue) ? propValue : [propValue];
           return allOf.reduce((yupAccAllOf, jsonSchemaAllOf, index) => {
             const schema = fixJsonSchemaProps(jsonSchemaAllOf);
-            // debug({ jsonSchemaAllOf, schema });
-
-            if (schema?.properties) {
-              schema.properties = Object.fromEntries(
-                Object.entries(schema.properties).map(
-                  ([key, { type, ...props }]) => [
-                    key,
-                    {
-                      type: yupAcc?.fields?.[key]?.type ?? type,
-                      ...props,
-                    },
-                  ]
-                )
-              );
-            }
-
             const yupSchemaAllOf = convert(schema)?.noUnknown(false);
             return yupAccAllOf
               .shape(
@@ -84,6 +69,41 @@ module.exports = ({ required, ...jsonSchema }, yupSchema) => {
                 }
               );
           }, yupAcc);
+        }
+
+        case 'anyOf': {
+          const anyOf = Array.isArray(propValue) ? propValue : [propValue];
+          const yupSchemasAnyOf = anyOf.map((jsonSchemaAnyOf) => {
+            const schema = fixJsonSchemaProps(jsonSchemaAnyOf, yupAcc);
+            // debug({ schema: JSON.stringify(schema, null, 2) });
+
+            return convert(schema)?.noUnknown?.(false);
+          });
+
+          return yupAcc.test('one-of', async (arr, context) => {
+            const { path, createError } = context;
+            const results = await Promise.all(
+              yupSchemasAnyOf.map(async (yupSchemaAnyOf) => {
+                try {
+                  // debug({ path, schema: yupSchemaAnyOf.describe() });
+                  await yup
+                    .object({ [path]: yupSchemaAnyOf.clone() })
+                    .validate({ [path]: arr }, { abortEarly: false });
+                  return true;
+                } catch (err) {
+                  // debug({ name: err.name, errors: err.errors });
+                  return err;
+                }
+              })
+            );
+
+            return results.some((result) => result === true)
+              ? true
+              : createError({
+                  path,
+                  message: results.filter((result) => result !== true),
+                });
+          });
         }
 
         default:

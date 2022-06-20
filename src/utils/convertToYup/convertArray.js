@@ -19,12 +19,11 @@ module.exports = (jsonSchema, yupSchema) => {
             if (!Array.isArray(propValue)) {
               // debug({ propValue });
               const schema = fixJsonSchemaProps(propValue);
-              if (schema.type.length) return yupAcc.of(convert(schema));
+              if (schema) return yupAcc.of(convert(schema));
             }
 
             const yupSchemasItems = propValue.map((item) => {
               const schema = fixJsonSchemaProps(item);
-              // debug(JSON.stringify({ schema }, null, 2));
               return convert(schema);
             });
 

@@ -35,6 +35,7 @@ module.exports = (jsonSchema, yupSchema, cb) => {
       case 'descriptionFrontend':
       case 'fieldNoDashesAndDots':
       case 'fieldTrim':
+      case 'fieldRound':
       case 'title':
       case 'additionalItems':
         keywordsMissing.ignored.push(propKey);
