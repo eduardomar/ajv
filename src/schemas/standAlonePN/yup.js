@@ -1,3 +1,5 @@
+import set from 'lodash/set';
+
 import schemaObj from './schema.json';
 import convertToYup from '../../utils/convertToYup';
 import getDebug from './debug';
@@ -9,7 +11,14 @@ export default async (value) => {
   const schema = convertToYup(schemaObj);
   try {
     // debug(schema.describe());
-    const result = await schema.validate(value, { abortEarly: false });
+    const valuesFix = { ...value };
+    delete valuesFix.send;
+    delete valuesFix.HBOLNumber;
+    delete valuesFix.htsDescription;
+    delete valuesFix.productFlags;
+    delete valuesFix.htsCode0;
+    delete valuesFix.manufacturerName;
+    const result = await schema.validate(valuesFix, { abortEarly: false });
     debug('Valid!!!');
     if (result?.dateOfArrival)
       result.dateOfArrival = Number(result.dateOfArrival.replace(/\//gi, ''));
@@ -18,9 +27,16 @@ export default async (value) => {
 
     return result;
   } catch (err) {
-    // debug(err);
-    debug({ name: err.name, errors: err.errors });
-  }
+    // debug({ err });
+    if (err.name !== 'ValidationError') {
+      throw err;
+    }
 
-  return undefined;
+    // return error.errors;
+    const message = err.inner.reduce((errors, currentError) => {
+      return set(errors, currentError.path, currentError.message);
+    }, {});
+    debug(JSON.stringify(message));
+    // throw err;
+  }
 };

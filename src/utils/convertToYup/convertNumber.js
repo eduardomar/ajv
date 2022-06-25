@@ -1,11 +1,11 @@
-import yup from 'yup';
+import * as Yup from 'yup';
 
 import getDebug from './debug';
-import keywordsMissing from './keywordsMissing';
+import { keywordsMissing } from './keywordsMissing';
 import reduceProps from './reduceProps';
 import convertString from './convertString';
 
-const debug = getDebug('convertNumber');
+const { log, error } = getDebug('convertNumber');
 
 export default (jsonSchema, yupSchema) => {
   if (jsonSchema.regex || jsonSchema.regexFrontend) {
@@ -17,10 +17,10 @@ export default (jsonSchema, yupSchema) => {
     return convertString(schemaString);
   }
 
-  // debug('Init');
+  // log('Init');
   return reduceProps(
     jsonSchema,
-    yup.isSchema(yupSchema) ? yupSchema : yup.number(),
+    Yup.isSchema(yupSchema) ? yupSchema : Yup.number(),
     (yupAcc, propKey) => {
       switch (propKey) {
         default:

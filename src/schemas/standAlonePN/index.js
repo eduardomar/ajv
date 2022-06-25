@@ -6,7 +6,7 @@ import jsonSchema from './jsonSchema';
 const debug = getDebug();
 
 export default async () => {
-  debug('init');
+  debug('Init');
 
   const result = await yup(value);
   if (result) {

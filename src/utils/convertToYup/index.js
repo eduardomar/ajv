@@ -1,18 +1,18 @@
 import getDebug from './debug';
-import convert from './convert';
 import * as keywordsMissing from './keywordsMissing';
+import convert from './convert';
 
-const debug = getDebug();
+const { log, error } = getDebug();
 
 export default (jsonSchema) => {
-  // debug('Init');
+  // log("Init");
   keywordsMissing.clear();
 
   if (!jsonSchema) return null;
 
   const yupSchema = convert(jsonSchema);
-  // debug('describe', yupSchema?.describe?.());
-  // debug(keywordsMissing.get());
-  // return JSON.parse(JSON.stringify(keywordsMissing.get()));
+
+  // log('describe', yupSchema?.describe?.());
+  log(keywordsMissing.get());
   return yupSchema;
 };

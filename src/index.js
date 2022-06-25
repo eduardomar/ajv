@@ -3,7 +3,6 @@ import oneOf from './schemas/oneOf';
 import anyOf from './schemas/anyOf';
 import allOf from './schemas/allOf';
 import standAlonePN from './schemas/standAlonePN';
-import convertAllSchemas from './convertAllSchemas';
 
 const debug = getDebug();
 

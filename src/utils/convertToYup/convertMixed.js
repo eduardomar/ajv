@@ -1,16 +1,16 @@
-import yup from 'yup';
+import * as Yup from 'yup';
 
 import getDebug from './debug';
-import keywordsMissing from './keywordsMissing';
+import { keywordsMissing } from './keywordsMissing';
 import reduceProps from './reduceProps';
 
-const debug = getDebug('convertMixed');
+const { log, error } = getDebug('convertMixed');
 
 export default (jsonSchema, yupSchema) => {
-  // debug('Init');
+  // log('Init');
   return reduceProps(
     jsonSchema,
-    yup.isSchema(yupSchema) ? yupSchema : yup.mixed(),
+    Yup.isSchema(yupSchema) ? yupSchema : Yup.mixed(),
     (yupAcc, propKey) => {
       switch (propKey) {
         default:

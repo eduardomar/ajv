@@ -1,26 +1,26 @@
 /* eslint-disable import/no-cycle */
-import yup from 'yup';
+import * as Yup from 'yup';
 
 import getDebug from './debug';
-import keywordsMissing from './keywordsMissing';
+import { keywordsMissing } from './keywordsMissing';
 import reduceProps from './reduceProps';
 import convert from './convert';
 import fixJsonSchemaProps from './fixJsonSchemaProps';
 
-const debug = getDebug('convertArray');
+const { log, error } = getDebug('convertArray');
 
 export default (jsonSchema, yupSchema) => {
-  // debug('Init');
+  // log('Init');
   return reduceProps(
     jsonSchema,
-    yup.isSchema(yupSchema) ? yupSchema : yup.array(),
+    Yup.isSchema(yupSchema) ? yupSchema : Yup.array(),
     (yupAcc, propKey, propValue) => {
-      // debug('%s %s', propKey, yupAcc.type);
+      // log('%s %s', propKey, yupAcc.type);
       switch (propKey) {
         case 'items': {
           if (propValue) {
             if (!Array.isArray(propValue)) {
-              // debug({ propValue });
+              // log({ propValue });
               const schema = fixJsonSchemaProps(propValue);
               if (schema) return yupAcc.of(convert(schema));
             }
@@ -30,42 +30,42 @@ export default (jsonSchema, yupSchema) => {
               return convert(schema);
             });
 
-            return yupAcc.test('items-order', async (arr, context) => {
-              const { path, createError } = context;
-              // if (yupSchemasItems.length !== (arr ?? []).length) return true;
-              // debug(yupSchemasItems.length, { arr, path });
+            return yupAcc.test(
+              'items-order',
+              async function testItemOrder(arr) {
+                const { path, createError } = this;
 
-              const obj = Object.fromEntries(
-                yupSchemasItems.map((yupSchemaItem, index) => {
-                  return [`${path}[${index}]`, yupSchemaItem];
-                })
-              );
-              const values = Object.fromEntries(
-                (arr ?? []).map((value, index) => {
-                  return [`${path}[${index}]`, value];
-                })
-              );
-              try {
-                await yup
-                  .object(obj)
-                  .required()
-                  .validate(values, { abortEarly: false });
-                // debug({ test });
-                return true;
-              } catch (err) {
-                // debug({ name: err.name, errors: err.errors });
-                return createError({
-                  path,
-                  message: err.errors,
-                });
+                const obj = Object.fromEntries(
+                  yupSchemasItems.map((yupSchemaItem, index) => {
+                    return [`${path}[${index}]`, yupSchemaItem];
+                  })
+                );
+                const values = Object.fromEntries(
+                  (arr ?? []).map((value, index) => {
+                    return [`${path}[${index}]`, value];
+                  })
+                );
+                try {
+                  await Yup.object(obj)
+                    .required()
+                    .validate(values, { abortEarly: false });
+                  // debug({ test });
+                  return true;
+                } catch (err) {
+                  // debug({ name: err.name, errors: err.errors });
+                  return createError({
+                    path,
+                    message: err.errors,
+                  });
+                }
               }
-            });
+            );
           }
           break;
         }
 
         case 'oneOf': {
-          // debug('oneOf', yupAcc.type);
+          // log('oneOf', yupAcc.type);
           const oneOf = Array.isArray(propValue) ? propValue : [propValue];
           const yupSchemasOneOf = oneOf.map((jsonSchemaOneOf) => {
             return convert({
@@ -74,15 +74,16 @@ export default (jsonSchema, yupSchema) => {
             });
           });
 
-          return yupAcc.test('one-of', async (arr, context) => {
-            const { path, createError } = context;
+          return yupAcc.test('one-of', async function testOneOf(arr) {
+            const { path, createError } = this;
             // debug({ arr, path });
             const results = await Promise.all(
               yupSchemasOneOf.map(async (yupSchemaOneOf) => {
                 try {
-                  await yup
-                    .object({ [path]: yupSchemaOneOf.clone() })
-                    .validate({ [path]: arr }, { abortEarly: false });
+                  await Yup.object({ [path]: yupSchemaOneOf.clone() }).validate(
+                    { [path]: arr },
+                    { abortEarly: false }
+                  );
                   return true;
                 } catch (err) {
                   // debug({ name: err.name, errors: err.errors });

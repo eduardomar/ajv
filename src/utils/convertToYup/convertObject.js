@@ -1,21 +1,23 @@
 /* eslint-disable import/no-cycle */
-import yup from 'yup';
+import * as Yup from 'yup';
 
 import getDebug from './debug';
-import keywordsMissing from './keywordsMissing';
+import { keywordsMissing } from './keywordsMissing';
 import reduceProps from './reduceProps';
 import convert from './convert';
 import fixJsonSchemaProps from './fixJsonSchemaProps';
 
-const debug = getDebug('convertObject');
+const { log, error } = getDebug('convertObject');
 
 export default ({ required, ...jsonSchema }, yupSchema) => {
-  // debug('Init');
+  // log('Init');
   return reduceProps(
     jsonSchema,
-    yup.isSchema(yupSchema) ? yupSchema : yup.object().strict().noUnknown(true),
+    Yup.isSchema(yupSchema)
+      ? yupSchema
+      : Yup.object({}).strict().noUnknown(true),
     (yupAcc, propKey, propValue) => {
-      // debug({ propKey, propValue: !!propValue });
+      // log({ propKey, propValue: !!propValue });
       switch (propKey) {
         case 'properties': {
           const yupSchemasFields = Object.entries(propValue ?? {})
@@ -28,7 +30,7 @@ export default ({ required, ...jsonSchema }, yupSchema) => {
             )
             .map(([key, value]) => {
               const oldSchema = yupAcc?.fields?.[key]?.clone() ?? null;
-              // debug({ key, value, fields: Object.keys(yupAcc?.fields) });
+              // log({ key, value, fields: Object.keys(yupAcc?.fields) });
               return [
                 key,
                 convert(
@@ -38,7 +40,7 @@ export default ({ required, ...jsonSchema }, yupSchema) => {
                 ),
               ];
             })
-            .filter(([, value]) => yup.isSchema(value));
+            .filter(([, value]) => Yup.isSchema(value));
 
           if (yupSchemasFields?.length) {
             return yupAcc.shape(Object.fromEntries(yupSchemasFields));
@@ -56,57 +58,19 @@ export default ({ required, ...jsonSchema }, yupSchema) => {
                 Object.fromEntries(
                   Object.entries(yupSchemaAllOf.fields).map(
                     ([key, schemaField]) => {
-                      return [key, yup?.[schemaField.type]?.()];
+                      return [key, Yup?.[schemaField.type]?.()];
                     }
                   )
                 )
               )
-              .test(
-                `all-of-${index}`,
-                'object lalo',
-                async (value, { path }) => {
-                  // debug.extend(index)(yupSchemaAllOf.describe());
-                  return yup
-                    .object({ [path]: yupSchemaAllOf.clone() })
-                    .validate({ [path]: value }, { abortEarly: false });
-                }
-              );
+              .test(`all-of-${index}`, async function testAllOf(value) {
+                const { path } = this;
+                return Yup.object({ [path]: yupSchemaAllOf.clone() }).validate(
+                  { [path]: value },
+                  { abortEarly: false }
+                );
+              });
           }, yupAcc);
-        }
-
-        case 'anyOf': {
-          const anyOf = Array.isArray(propValue) ? propValue : [propValue];
-          const yupSchemasAnyOf = anyOf.map((jsonSchemaAnyOf) => {
-            const schema = fixJsonSchemaProps(jsonSchemaAnyOf, yupAcc);
-            // debug({ schema: JSON.stringify(schema, null, 2) });
-
-            return convert(schema)?.noUnknown?.(false);
-          });
-
-          return yupAcc.test('one-of', async (arr, context) => {
-            const { path, createError } = context;
-            const results = await Promise.all(
-              yupSchemasAnyOf.map(async (yupSchemaAnyOf) => {
-                try {
-                  // debug({ path, schema: yupSchemaAnyOf.describe() });
-                  await yup
-                    .object({ [path]: yupSchemaAnyOf.clone() })
-                    .validate({ [path]: arr }, { abortEarly: false });
-                  return true;
-                } catch (err) {
-                  // debug({ name: err.name, errors: err.errors });
-                  return err;
-                }
-              })
-            );
-
-            return results.some((result) => result === true)
-              ? true
-              : createError({
-                  path,
-                  message: results.filter((result) => result !== true),
-                });
-          });
         }
 
         default:

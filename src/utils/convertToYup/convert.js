@@ -1,15 +1,15 @@
-/* eslint-disable global-require */
 /* eslint-disable import/no-cycle */
-import yup from 'yup';
+import * as Yup from 'yup';
+
 import getDebug from './debug';
-import keywordsMissing from './keywordsMissing';
+import { keywordsMissing } from './keywordsMissing';
 import convertObject from './convertObject';
 import convertString from './convertString';
 import convertArray from './convertArray';
 import convertNumber from './convertNumber';
 import convertMixed from './convertMixed';
 
-const debug = getDebug('convert');
+const { log, error } = getDebug('convert');
 
 const getTypes = (schema) => {
   const normType = schema?.type ?? [];
@@ -53,18 +53,7 @@ const fixSchema = (schema) => {
       jsonSchema.maxItems = max;
     }
   } else if (jsonSchema.additionalItems === true) {
-    // debug('%d', 3);
     delete jsonSchema.additionalItems;
-    delete jsonSchema.maxItems;
-  }
-
-  if (
-    jsonSchema.minItems === jsonSchema.maxItems &&
-    Number.isInteger(parseInt(jsonSchema.minItems, 10))
-  ) {
-    // debug('%d', 4);
-    jsonSchema.length = jsonSchema.minItems;
-    delete jsonSchema.minItems;
     delete jsonSchema.maxItems;
   }
 
@@ -80,7 +69,7 @@ export default (schema, yupSchema, extraValidations = {}) => {
   let retSchema;
   const type = types?.length === 1 ? types[0] : 'mixed';
 
-  // debug('Init :: %s', type);
+  // log('Init :: %s', type);
   switch (type) {
     case 'object':
       retSchema = convertObject(jsonSchema, yupSchema);
@@ -107,19 +96,19 @@ export default (schema, yupSchema, extraValidations = {}) => {
       break;
 
     default:
-      retSchema = yup.mixed();
+      retSchema = Yup.mixed();
       keywordsMissing.types.push(type);
       break;
   }
 
-  if (yup.isSchema(retSchema)) {
+  if (Yup.isSchema(retSchema)) {
     retSchema = Object.entries(extraValidations ?? {})
       .concat([['nullable', [isNullable]]])
       .reduce((yupAcc, [func, extra]) => {
         if (typeof (yupAcc?.[func] ?? '') === 'function') {
           // console.log(schema.title, { func, extra: extra ?? [] });
           const extraData = Array.isArray(extra) ? extra : [];
-          // if (type === 'array') debug('%o', { func, extra, extraData });
+          // if (type === 'array') log('%o', { func, extra, extraData });
           return yupAcc[func](...extraData);
         }
 
@@ -127,5 +116,5 @@ export default (schema, yupSchema, extraValidations = {}) => {
       }, retSchema);
   }
 
-  return retSchema;
+  return retSchema.clone();
 };

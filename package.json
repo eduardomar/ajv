@@ -20,7 +20,8 @@
     "debug": "^4.3.4",
     "dotenv": "^16.0.1",
     "nodemon": "^2.0.16",
-    "yup": "^0.29.1"
+    "yup": "^0.29.1",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "eslint": "^8.18.0",

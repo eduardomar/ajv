@@ -1,13 +1,13 @@
-import yup from 'yup';
+import * as Yup from 'yup';
 
 import getDebug from './debug';
-import keywordsMissing from './keywordsMissing';
+import { keywordsMissing } from './keywordsMissing';
 import reduceProps from './reduceProps';
 
-const debug = getDebug('convertString');
+const { log, error } = getDebug('convertString');
 
 export default (jsonSchema, yupSchema) => {
-  // debug('Init');
+  // log('Init');
   const schema = { ...jsonSchema };
   if (schema.regexFrontend) {
     delete schema.regex;
@@ -15,7 +15,7 @@ export default (jsonSchema, yupSchema) => {
 
   return reduceProps(
     schema,
-    yup.isSchema(yupSchema) ? yupSchema : yup.string(),
+    Yup.isSchema(yupSchema) ? yupSchema : Yup.string(),
     (yupAcc, propKey, propValue) => {
       switch (propKey) {
         case 'enum': {

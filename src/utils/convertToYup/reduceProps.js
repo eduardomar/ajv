@@ -1,7 +1,7 @@
-import keywordsMissing from './keywordsMissing';
+import { keywordsMissing } from './keywordsMissing';
 import getDebug from './debug';
 
-const debug = getDebug('reduceProps');
+const { log, error } = getDebug('reduceProps');
 const lastItems = ['allOf', 'oneOf', 'anyOf', 'items'];
 
 export default (jsonSchema, yupSchema, cb) => {
@@ -24,7 +24,7 @@ export default (jsonSchema, yupSchema, cb) => {
 
   // yupSchema.meta(jsonSchema);
   return entries.reduce((yupAcc, [propKey, propValue]) => {
-    // if (index === entries.length - 1) debug('Last ::> %s', propKey);
+    // if (index === entries.length - 1) log('Last ::> %s', propKey);
     // return cb(yupAcc, propKey, propValue);
 
     switch (propKey) {
@@ -63,10 +63,13 @@ export default (jsonSchema, yupSchema, cb) => {
           funcName = 'min';
         } else if (['maxLength', 'maxItems', 'maximum'].includes(propKey)) {
           funcName = 'max';
+        } else {
+          funcName = 'length';
         }
+
         const num = parseInt(propValue, 10);
 
-        // debug({ key, funcName, num });
+        // log({ key, funcName, num });
         if (Number.isInteger(num) && yupAcc?.[funcName]) {
           return yupAcc[funcName](num);
         }

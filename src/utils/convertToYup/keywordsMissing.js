@@ -1,4 +1,4 @@
-const keywordsMissing = {
+export const keywordsMissing = {
   types: [],
   object: [],
   string: [],
@@ -21,5 +21,3 @@ export const get = () =>
       [...new Set(arr)],
     ])
   );
-
-export default keywordsMissing;
