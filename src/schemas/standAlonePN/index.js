@@ -1,9 +1,11 @@
-const value = require('./value.json');
-const debug = require('./debug')();
-const yup = require('./yup');
-const jsonSchema = require('./jsonSchema');
+import value from './value.json';
+import getDebug from './debug';
+import yup from './yup';
+import jsonSchema from './jsonSchema';
 
-module.exports = async () => {
+const debug = getDebug();
+
+export default async () => {
   debug('init');
 
   const result = await yup(value);

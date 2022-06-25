@@ -1,8 +1,10 @@
-const schema = require('./schema.json');
-const createValidate = require('../../utils/createValidate');
-const debug = require('./debug')('json-schema');
+import schema from './schema.json';
+import createValidate from '../../utils/createValidate';
+import getDebug from './debug';
 
-module.exports = (value) => {
+const debug = getDebug('json-schema');
+
+export default (value) => {
   debug('Init');
   // debug(
   //   'keys %o',

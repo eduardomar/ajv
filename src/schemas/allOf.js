@@ -1,5 +1,5 @@
 // The data is valid if it is valid according to all JSON Schemas in this array.
-const runSchemas = require('../utils/runSchemas');
+import runSchemas from '../utils/runSchemas';
 
 const schemas = [
   {
@@ -15,4 +15,4 @@ const schemas = [
   },
 ];
 
-module.exports = () => runSchemas('allOf', schemas);
+export default () => runSchemas('allOf', schemas);

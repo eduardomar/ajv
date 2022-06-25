@@ -1,6 +1,6 @@
-const createValidate = require('./createValidate');
+import createValidate from './createValidate';
 
-module.exports = (schema, values) => {
+export default (schema, values) => {
   const { _id, ...rest } = schema;
   const validate = createValidate(rest);
 

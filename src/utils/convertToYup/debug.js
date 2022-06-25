@@ -1,3 +1,3 @@
-const getDebug = require('../debug');
+import getDebug from '../debug';
 
-module.exports = (...args) => getDebug('convertToYup', ...(args || []));
+export default (...args) => getDebug('convertToYup', ...(args || []));

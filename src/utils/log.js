@@ -7,7 +7,7 @@ const valuesToStr = (values, maxLengthValue) =>
     })
     .join(', ');
 
-module.exports = (debug, values, data) => {
+export default (debug, values, data) => {
   // debug('Init');
   const maxLengthValue = Math.max(...values.map((value) => `${value}`.length));
   data.forEach(() => {});

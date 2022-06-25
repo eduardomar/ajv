@@ -1,5 +1,5 @@
 // The data is valid if it matches exactly one JSON Schema from this array
-const runSchemas = require('../utils/runSchemas');
+import runSchemas from '../utils/runSchemas';
 
 const schemas = [
   {
@@ -22,4 +22,4 @@ const schemas = [
   },
 ];
 
-module.exports = () => runSchemas('oneOf', schemas);
+export default () => runSchemas('oneOf', schemas);

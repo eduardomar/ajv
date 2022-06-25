@@ -1,4 +1,4 @@
-module.exports = () =>
+export default () =>
   new Array(24)
     .fill(0.5)
     .reduce(

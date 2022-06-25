@@ -1,8 +1,10 @@
-const debug = require('./debug')();
-const convert = require('./convert');
-const keywordsMissing = require('./keywordsMissing');
+import getDebug from './debug';
+import convert from './convert';
+import * as keywordsMissing from './keywordsMissing';
 
-module.exports = (jsonSchema) => {
+const debug = getDebug();
+
+export default (jsonSchema) => {
   // debug('Init');
   keywordsMissing.clear();
 
@@ -11,5 +13,6 @@ module.exports = (jsonSchema) => {
   const yupSchema = convert(jsonSchema);
   // debug('describe', yupSchema?.describe?.());
   // debug(keywordsMissing.get());
+  // return JSON.parse(JSON.stringify(keywordsMissing.get()));
   return yupSchema;
 };

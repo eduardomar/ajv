@@ -1,11 +1,12 @@
-const getValues = require('./getValues');
-const validate = require('./validate');
-const log = require('./log');
-const debug = require('./debug')('runSchemas');
+import getValues from './getValues';
+import validate from './validate';
+import log from './log';
+import getDebug from './debug';
 
+const debug = getDebug('runSchemas');
 const defValues = getValues();
 
-module.exports = (id, schemas, values = defValues) => {
+export default (id, schemas, values = defValues) => {
   const results = schemas.map((schema) => {
     return validate({ _id: schema._id ?? '', ...schema }, values);
   });

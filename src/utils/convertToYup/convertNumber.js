@@ -1,11 +1,13 @@
-const yup = require('yup');
+import yup from 'yup';
 
-const debug = require('./debug')('convertNumber');
-const { keywordsMissing } = require('./keywordsMissing');
-const reduceProps = require('./reduceProps');
-const convertString = require('./convertString');
+import getDebug from './debug';
+import keywordsMissing from './keywordsMissing';
+import reduceProps from './reduceProps';
+import convertString from './convertString';
 
-module.exports = (jsonSchema, yupSchema) => {
+const debug = getDebug('convertNumber');
+
+export default (jsonSchema, yupSchema) => {
   if (jsonSchema.regex || jsonSchema.regexFrontend) {
     const schemaString = { ...jsonSchema };
     delete schemaString.minLength;

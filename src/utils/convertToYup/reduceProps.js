@@ -1,9 +1,10 @@
-const { keywordsMissing } = require('./keywordsMissing');
-const debug = require('./debug')('reduceProps');
+import keywordsMissing from './keywordsMissing';
+import getDebug from './debug';
 
+const debug = getDebug('reduceProps');
 const lastItems = ['allOf', 'oneOf', 'anyOf', 'items'];
 
-module.exports = (jsonSchema, yupSchema, cb) => {
+export default (jsonSchema, yupSchema, cb) => {
   const entries = Object.entries(jsonSchema ?? {}).sort(([a], [b]) => {
     const result = lastItems.reduce((acc, field) => {
       if (acc === 0) {

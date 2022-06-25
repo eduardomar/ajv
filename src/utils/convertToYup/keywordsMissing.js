@@ -8,13 +8,13 @@ const keywordsMissing = {
   ignored: [],
 };
 
-const clear = () => {
+export const clear = () => {
   Object.keys(keywordsMissing).forEach((key) => {
     keywordsMissing[key] = [];
   });
 };
 
-const get = () =>
+export const get = () =>
   Object.fromEntries(
     Object.entries(keywordsMissing).map(([key, arr]) => [
       key,
@@ -22,4 +22,4 @@ const get = () =>
     ])
   );
 
-module.exports = { keywordsMissing, clear, get };
+export default keywordsMissing;

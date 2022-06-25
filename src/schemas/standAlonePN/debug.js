@@ -1,3 +1,3 @@
-const getDebug = require('../../utils/debug');
+import getDebug from '../../utils/debug';
 
-module.exports = (...args) => getDebug('standAlonePN', ...(args || []));
+export default (...args) => getDebug('standAlonePN', ...(args || []));

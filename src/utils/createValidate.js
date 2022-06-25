@@ -1,15 +1,16 @@
-const Ajv = require('ajv');
-const draft6MetaSchema = require('ajv/lib/refs/json-schema-draft-06.json');
+import Ajv from 'ajv';
+import draft6MetaSchema from 'ajv/lib/refs/json-schema-draft-06.json';
 
-const debug = require('./debug')('createValidate');
+import getDebug from './debug';
 
+const debug = getDebug('createValidate');
 const base = `"\\$ref":"[^"]+"`;
 const regexes = [
   [new RegExp(`,${base},`, 'ig'), ','],
   [new RegExp(`(,${base})|(${base},)`, 'ig'), ''],
 ];
 
-module.exports = (...schemas) => {
+export default (...schemas) => {
   if (!schemas?.length) return undefined;
 
   const [schema, ...rest] = JSON.parse(

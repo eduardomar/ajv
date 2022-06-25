@@ -1,10 +1,12 @@
-const yup = require('yup');
+import yup from 'yup';
 
-const debug = require('./debug')('convertMixed');
-const { keywordsMissing } = require('./keywordsMissing');
-const reduceProps = require('./reduceProps');
+import getDebug from './debug';
+import keywordsMissing from './keywordsMissing';
+import reduceProps from './reduceProps';
 
-module.exports = (jsonSchema, yupSchema) => {
+const debug = getDebug('convertMixed');
+
+export default (jsonSchema, yupSchema) => {
   // debug('Init');
   return reduceProps(
     jsonSchema,

@@ -1,12 +1,15 @@
-const yup = require('yup');
+/* eslint-disable import/no-cycle */
+import yup from 'yup';
 
-const debug = require('./debug')('convertObject');
-const { keywordsMissing } = require('./keywordsMissing');
-const reduceProps = require('./reduceProps');
-const convert = require('./convert');
-const fixJsonSchemaProps = require('./fixJsonSchemaProps');
+import getDebug from './debug';
+import keywordsMissing from './keywordsMissing';
+import reduceProps from './reduceProps';
+import convert from './convert';
+import fixJsonSchemaProps from './fixJsonSchemaProps';
 
-module.exports = ({ required, ...jsonSchema }, yupSchema) => {
+const debug = getDebug('convertObject');
+
+export default ({ required, ...jsonSchema }, yupSchema) => {
   // debug('Init');
   return reduceProps(
     jsonSchema,

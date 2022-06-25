@@ -1,4 +1,4 @@
-module.exports = (propValue, yupSchema) => {
+export default (propValue, yupSchema) => {
   if (propValue.type) return propValue;
 
   let schema = { ...propValue };

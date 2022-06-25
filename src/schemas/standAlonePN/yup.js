@@ -1,8 +1,10 @@
-const schemaObj = require('./schema.json');
-const convertToYup = require('../../utils/convertToYup');
-const debug = require('./debug')('yup');
+import schemaObj from './schema.json';
+import convertToYup from '../../utils/convertToYup';
+import getDebug from './debug';
 
-module.exports = async (value) => {
+const debug = getDebug('yup');
+
+export default async (value) => {
   debug('Init');
   const schema = convertToYup(schemaObj);
   try {

@@ -1,7 +1,15 @@
 /* eslint-disable global-require */
-const yup = require('yup');
-const debug = require('./debug')('convert');
-const { keywordsMissing } = require('./keywordsMissing');
+/* eslint-disable import/no-cycle */
+import yup from 'yup';
+import getDebug from './debug';
+import keywordsMissing from './keywordsMissing';
+import convertObject from './convertObject';
+import convertString from './convertString';
+import convertArray from './convertArray';
+import convertNumber from './convertNumber';
+import convertMixed from './convertMixed';
+
+const debug = getDebug('convert');
 
 const getTypes = (schema) => {
   const normType = schema?.type ?? [];
@@ -18,6 +26,11 @@ const getTypes = (schema) => {
 
 const fixSchema = (schema) => {
   const jsonSchema = JSON.parse(JSON.stringify(schema ?? {}));
+  if (jsonSchema.minlength) {
+    jsonSchema.minLength = jsonSchema.minlength;
+    delete jsonSchema.minlength;
+  }
+
   if (
     jsonSchema.minLength === jsonSchema.maxLength &&
     Number.isInteger(parseInt(jsonSchema.minLength, 10))
@@ -58,7 +71,7 @@ const fixSchema = (schema) => {
   return jsonSchema;
 };
 
-module.exports = (schema, yupSchema, extraValidations = {}) => {
+export default (schema, yupSchema, extraValidations = {}) => {
   const jsonSchema = fixSchema(schema);
   const { isNullable, types } = getTypes(jsonSchema);
   if (!types?.length) {
@@ -70,27 +83,27 @@ module.exports = (schema, yupSchema, extraValidations = {}) => {
   // debug('Init :: %s', type);
   switch (type) {
     case 'object':
-      retSchema = require('./convertObject')(jsonSchema, yupSchema);
+      retSchema = convertObject(jsonSchema, yupSchema);
       break;
 
     case 'string':
-      retSchema = require('./convertString')(jsonSchema, yupSchema);
+      retSchema = convertString(jsonSchema, yupSchema);
       break;
 
     case 'array':
-      retSchema = require('./convertArray')(jsonSchema, yupSchema);
+      retSchema = convertArray(jsonSchema, yupSchema);
       break;
 
     case 'number':
     case 'integer':
-      retSchema = require('./convertNumber')(jsonSchema, yupSchema);
+      retSchema = convertNumber(jsonSchema, yupSchema);
       if (type === 'integer') {
         retSchema.integer();
       }
       break;
 
     case 'mixed':
-      retSchema = require('./convertMixed')(jsonSchema, yupSchema);
+      retSchema = convertMixed(jsonSchema, yupSchema);
       break;
 
     default:
