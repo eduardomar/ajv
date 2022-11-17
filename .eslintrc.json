@@ -6,8 +6,13 @@
   },
   "extends": ["airbnb-base", "prettier", "plugin:prettier/recommended"],
   "plugins": ["prettier"],
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "ecmaVersion": "latest",
+    "requireConfigFile": false,
+    "babelOptions": {
+      "plugins": ["@babel/plugin-syntax-import-assertions"]
+    }
   },
   "rules": {
     "prettier/prettier": "error",

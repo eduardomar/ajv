@@ -1,5 +1,5 @@
 import Ajv from 'ajv';
-import draft6MetaSchema from 'ajv/lib/refs/json-schema-draft-06.json';
+import draft6MetaSchema from 'ajv/lib/refs/json-schema-draft-06.json' assert { type: 'json' };
 
 import getDebug from './debug';
 

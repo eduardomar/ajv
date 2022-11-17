@@ -1,4 +1,4 @@
-import schema from './schema.json';
+import schema from './schema.json' assert { type: 'json' };
 import createValidate from '../../utils/createValidate';
 import getDebug from './debug';
 

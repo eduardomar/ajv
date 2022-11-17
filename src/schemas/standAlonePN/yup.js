@@ -1,6 +1,6 @@
 import set from 'lodash/set';
 
-import schemaObj from './schema.json';
+import schemaObj from './schema.json' assert { type: 'json' };
 import convertToYup from '../../utils/convertToYup';
 import getDebug from './debug';
 
@@ -39,4 +39,6 @@ export default async (value) => {
     debug(JSON.stringify(message));
     // throw err;
   }
+
+  return null;
 };
